@@ -1,33 +1,63 @@
 package br.com.jhonatapers.scta.domain.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.Id;
+
+import br.com.jhonatapers.scta.domain.aggregate.SlotHorario;
 
 @Entity
 public class Aerovia {
-    
-    private Coordenada extremoInicio;
 
-    private Coordenada extremoFinal;
+    @Id
+    private final String nome;
 
-    public Aerovia(Coordenada extremoInicio, Coordenada extremoFinal) {
+    private ReferenciaGeografica extremoInicio;
+
+    private ReferenciaGeografica extremoFinal;
+
+    private int extensao;
+
+    private List<SlotHorario> slotsHorarios;
+
+    public Aerovia(String nome, ReferenciaGeografica extremoInicio, ReferenciaGeografica extremoFinal, int extensao) {
+        this.nome = nome;
         this.extremoInicio = extremoInicio;
         this.extremoFinal = extremoFinal;
+        this.extensao = extensao;
     }
 
-    public Coordenada getExtremoInicio() {
+    public String getNome() {
+        return nome;
+    }
+
+    public ReferenciaGeografica getExtremoInicio() {
         return extremoInicio;
     }
 
-    public void setExtremoInicio(Coordenada extremoInicio) {
+    public void setExtremoInicio(ReferenciaGeografica extremoInicio) {
         this.extremoInicio = extremoInicio;
     }
 
-    public Coordenada getExtremoFinal() {
+    public ReferenciaGeografica getExtremoFinal() {
         return extremoFinal;
     }
 
-    public void setExtremoFinal(Coordenada extremoFinal) {
+    public void setExtremoFinal(ReferenciaGeografica extremoFinal) {
         this.extremoFinal = extremoFinal;
+    }
+
+    public int getExtensao() {
+        return extensao;
+    }
+
+    public List<SlotHorario> getSlotsHorarios() {
+        return slotsHorarios;
+    }
+
+    public void addSlotHorario(SlotHorario slotHorario) {
+        this.slotsHorarios.add(slotHorario);
     }
 
 }

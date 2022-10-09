@@ -10,7 +10,7 @@ public class AeronavesService {
     @Autowired
     private IAeronavesRepository repository;
 
-    public Aeronave novaAeronave(Aeronave aeronave) {
+    public Aeronave criar(Aeronave aeronave) {
 
         Aeronave _aeronave = repository.findByPrefixo(aeronave.getPrefixo());
 
@@ -20,13 +20,12 @@ public class AeronavesService {
             return _aeronave;
     }
 
-    public void removerAeronave(Aeronave aeronave) {
+    public void remover(Aeronave aeronave) {
         repository.remove(aeronave);
     }
 
-    public Aeronave buscaAeronave(String prefixo) {
-        Aeronave aeronave = repository.findByPrefixo(prefixo);
-        return aeronave;
+    public Aeronave buscar(String prefixo) {
+        return repository.findByPrefixo(prefixo);
     }
 
 }
