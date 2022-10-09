@@ -19,6 +19,8 @@ public class PlanoDeVoo {
 
     private float velocidadeCruzeiro;
 
+    private boolean cancelado;
+
     public PlanoDeVoo(Date data, Rota rota, float altitude, float velocidadeCruzeiro) {
         this.data = data;
         this.rota = rota;
@@ -60,6 +62,14 @@ public class PlanoDeVoo {
 
     public void setVelocidadeCruzeiro(float velocidadeCruzeiro) {
         this.velocidadeCruzeiro = velocidadeCruzeiro;
+    }
+
+    public boolean isCancelado() {
+        return cancelado;
+    }
+
+    public void setCancelado(boolean cancelado) {
+        this.cancelado = cancelado;
     }
 
 }

@@ -1,12 +1,7 @@
-package br.com.jhonatapers.scta.domain.entity;
+package br.com.jhonatapers.scta.domain.aggregate;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
-@Entity
 public class ReferenciaGeografica {
 
-    @Id
     private final String nome;
 
     private final long latitude;

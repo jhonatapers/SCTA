@@ -5,7 +5,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Aeronave {
-    
+
     @Id
     private final String prefixo;
 
@@ -22,10 +22,6 @@ public class Aeronave {
 
     public float getVelocidadeCruzeiro() {
         return velocidadeCruzeiro;
-    }
-
-    public void setVelocidadeCruzeiro(float velocidadeCruzeiro) {
-        this.velocidadeCruzeiro = velocidadeCruzeiro;
     }
 
 }

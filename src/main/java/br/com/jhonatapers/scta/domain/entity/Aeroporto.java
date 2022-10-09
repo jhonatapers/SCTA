@@ -3,6 +3,8 @@ package br.com.jhonatapers.scta.domain.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import br.com.jhonatapers.scta.domain.aggregate.ReferenciaGeografica;
+
 @Entity
 public class Aeroporto {
 
@@ -27,16 +29,8 @@ public class Aeroporto {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public ReferenciaGeografica getCoordenada() {
         return coordenada;
-    }
-
-    public void setCoordenada(ReferenciaGeografica coordenada) {
-        this.coordenada = coordenada;
     }
 
 }

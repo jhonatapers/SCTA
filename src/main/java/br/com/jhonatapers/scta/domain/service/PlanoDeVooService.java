@@ -7,8 +7,8 @@ public class PlanoDeVooService {
 
     private IPlanoDeVooRepository repository;
 
-    public PlanoDeVoo criar(PlanoDeVoo planoDeVoo) {
-        PlanoDeVoo _planoDeVoo = repository.findById(planoDeVoo.getId());
+    private PlanoDeVoo criar(PlanoDeVoo planoDeVoo) {
+        PlanoDeVoo _planoDeVoo = buscar(planoDeVoo.getId());
 
         if (_planoDeVoo == null)
             return repository.save(planoDeVoo);
@@ -16,12 +16,27 @@ public class PlanoDeVooService {
             return _planoDeVoo;
     }
 
-    public void remover(PlanoDeVoo planoDeVoo) {
+    private void remover(PlanoDeVoo planoDeVoo) {
         repository.remove(planoDeVoo);
     }
 
     public PlanoDeVoo buscar(long id) {
         return repository.findById(id);
+    }
+
+    public boolean verificar(PlanoDeVoo planoDeVoo) {
+
+        return false;
+    }
+
+    public void cancelar(PlanoDeVoo planoDeVoo) {
+
+        
+
+    }
+
+    public void autorizar(PlanoDeVoo planoDeVoo) {
+
     }
 
 }

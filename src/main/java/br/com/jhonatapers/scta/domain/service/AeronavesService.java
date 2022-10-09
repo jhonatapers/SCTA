@@ -12,7 +12,7 @@ public class AeronavesService {
 
     public Aeronave criar(Aeronave aeronave) {
 
-        Aeronave _aeronave = repository.findByPrefixo(aeronave.getPrefixo());
+        Aeronave _aeronave = buscar(aeronave.getPrefixo());
 
         if (_aeronave == null)
             return repository.save(aeronave);
