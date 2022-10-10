@@ -1,16 +1,16 @@
 package br.com.jhonatapers.scta.domain.aggregate;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 public class SlotHorario {
     
     private long altitude;
 
-    private Date dataHora;
+    private LocalDateTime dataHora;
 
     private boolean ocupado;
 
-    public SlotHorario(long altitude, Date dataHora, boolean ocupado) {
+    public SlotHorario(long altitude, LocalDateTime dataHora, boolean ocupado) {
         this.altitude = altitude;
         this.dataHora = dataHora;
         this.ocupado = ocupado;
@@ -20,7 +20,7 @@ public class SlotHorario {
         return altitude;
     }
 
-    public Date getDataHora() {
+    public LocalDateTime getDataHora() {
         return dataHora;
     }
 

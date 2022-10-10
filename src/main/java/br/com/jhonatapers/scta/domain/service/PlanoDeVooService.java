@@ -7,6 +7,10 @@ public class PlanoDeVooService {
 
     private IPlanoDeVooRepository repository;
 
+    private RotasService rotasService;
+
+    private AeroviaService aeroviaService;
+
     private PlanoDeVoo criar(PlanoDeVoo planoDeVoo) {
         PlanoDeVoo _planoDeVoo = buscar(planoDeVoo.getId());
 
@@ -26,13 +30,16 @@ public class PlanoDeVooService {
 
     public boolean verificar(PlanoDeVoo planoDeVoo) {
 
-        return false;
+        return true;
     }
 
     public void cancelar(PlanoDeVoo planoDeVoo) {
 
-        
+        planoDeVoo.getRota().getAerovias().forEach(aerovia -> {
+            aeroviaService.desocuparSlotHorario(aerovia, planoDeVoo.getAltitude(), planoDeVoo.getData(), planoDeVoo.getVelocidadeCruzeiro());
+        });
 
+        repository.remove(planoDeVoo);
     }
 
     public void autorizar(PlanoDeVoo planoDeVoo) {

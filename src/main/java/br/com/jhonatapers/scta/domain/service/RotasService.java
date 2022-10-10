@@ -26,12 +26,12 @@ public class RotasService {
 
     public List<Rota> consultarEntreAeroportos(Aeroporto origem, Aeroporto destino) {
 
-        List<Rota> rotas = new LinkedList<Rota>();
+        List<Rota> rotas = repository.findAll();
 
 
         return rotas;
     }
 
-    
+
 
 }

@@ -34,7 +34,25 @@ public class AeroviaService {
         List<SlotHorario> slotsHorariosLivres = new LinkedList<SlotHorario>();
 
         return slotsHorariosLivres;
+    }
 
+    public List<Aerovia> comProblema(){
+        return new LinkedList<Aerovia>();
+    }
+
+    public void desocuparSlotHorario(Aerovia aerovia, float altitude, LocalDateTime dataHoraPartida, float velocidadeCruzeiro) {
+
+        int horas = 1; //caclculo de quantas horas vai ocupar
+
+        //verificar se aerovia e alterada aqui
+        aerovia.getSlotsHorarios().stream()
+                .filter(slotHorario -> {
+                    return true; //condicao para slotOcupado daquela hora e daquela altitude
+                }).findAny().ifPresent(slotHorario -> {
+                    slotHorario.setOcupado(false);
+                });
+
+        repository.update(aerovia);
     }
 
 }

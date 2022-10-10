@@ -1,6 +1,6 @@
 package br.com.jhonatapers.scta.domain.entity;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -11,7 +11,7 @@ public class PlanoDeVoo {
     @Id
     private long id;
 
-    private Date data;
+    private LocalDateTime data;
 
     private Rota rota;
 
@@ -21,7 +21,7 @@ public class PlanoDeVoo {
 
     private boolean cancelado;
 
-    public PlanoDeVoo(Date data, Rota rota, float altitude, float velocidadeCruzeiro) {
+    public PlanoDeVoo(LocalDateTime data, Rota rota, float altitude, float velocidadeCruzeiro) {
         this.data = data;
         this.rota = rota;
         this.altitude = altitude;
@@ -32,11 +32,11 @@ public class PlanoDeVoo {
         return id;
     }
 
-    public Date getData() {
+    public LocalDateTime getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDateTime data) {
         this.data = data;
     }
 

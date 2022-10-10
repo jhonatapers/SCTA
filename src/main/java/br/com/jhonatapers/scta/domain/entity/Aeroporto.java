@@ -3,8 +3,6 @@ package br.com.jhonatapers.scta.domain.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import br.com.jhonatapers.scta.domain.aggregate.ReferenciaGeografica;
-
 @Entity
 public class Aeroporto {
 

@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import br.com.jhonatapers.scta.domain.aggregate.ReferenciaGeografica;
 import br.com.jhonatapers.scta.domain.aggregate.SlotHorario;
 
 @Entity
