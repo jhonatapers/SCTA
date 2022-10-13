@@ -17,11 +17,11 @@ public class Aerovia {
 
     private ReferenciaGeografica extremoFinal;
 
-    private int extensao;
+    private float extensao;
 
     private List<SlotHorario> slotsHorarios;
 
-    public Aerovia(String nome, ReferenciaGeografica extremoInicio, ReferenciaGeografica extremoFinal, int extensao) {
+    public Aerovia(String nome, ReferenciaGeografica extremoInicio, ReferenciaGeografica extremoFinal, float extensao) {
         this.nome = nome;
         this.extremoInicio = extremoInicio;
         this.extremoFinal = extremoFinal;
@@ -40,7 +40,7 @@ public class Aerovia {
         return extremoFinal;
     }
 
-    public int getExtensao() {
+    public float getExtensao() {
         return extensao;
     }
 

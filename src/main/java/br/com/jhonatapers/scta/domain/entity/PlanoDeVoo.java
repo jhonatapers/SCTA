@@ -11,7 +11,7 @@ public class PlanoDeVoo {
     @Id
     private long id;
 
-    private LocalDateTime data;
+    private LocalDateTime dataHora;
 
     private Rota rota;
 
@@ -22,7 +22,7 @@ public class PlanoDeVoo {
     private boolean cancelado;
 
     public PlanoDeVoo(LocalDateTime data, Rota rota, float altitude, float velocidadeCruzeiro) {
-        this.data = data;
+        this.dataHora = data;
         this.rota = rota;
         this.altitude = altitude;
         this.velocidadeCruzeiro = velocidadeCruzeiro;
@@ -32,12 +32,12 @@ public class PlanoDeVoo {
         return id;
     }
 
-    public LocalDateTime getData() {
-        return data;
+    public LocalDateTime getDataHora() {
+        return dataHora;
     }
 
-    public void setData(LocalDateTime data) {
-        this.data = data;
+    public void setDataHora(LocalDateTime data) {
+        this.dataHora = data;
     }
 
     public Rota getRota() {

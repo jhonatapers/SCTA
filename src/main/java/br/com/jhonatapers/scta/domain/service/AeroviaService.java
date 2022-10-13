@@ -1,8 +1,11 @@
 package br.com.jhonatapers.scta.domain.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.jhonatapers.scta.domain.entity.Aerovia;
 import br.com.jhonatapers.scta.domain.aggregate.SlotHorario;
@@ -10,49 +13,79 @@ import br.com.jhonatapers.scta.domain.repository.IAeroviaRepository;
 
 public class AeroviaService {
 
+    @Autowired
     private IAeroviaRepository repository;
-
-    public Aerovia criar(Aerovia aerovia) {
-        Aerovia _aerovia = buscar(aerovia.getNome());
-
-        if (_aerovia == null)
-            return repository.save(aerovia);
-        else
-            return _aerovia;
-    }
-
-    public void remover(Aerovia aerovia) {
-        repository.remove(aerovia);
-    }
 
     public Aerovia buscar(String nome) {
         return repository.findByNome(nome);
     }
 
-    public List<SlotHorario> slotsHorariosLivres(Aerovia aerovia, LocalDateTime dataHoraPartida, float velocidadeCruzeiro, boolean sentidoIda) {
+    public List<SlotHorario> slotsOcupados(Aerovia aerovia, LocalDateTime dataHoraPartida, float velocidadeCruzeiro) {
+        final int horasVoo = (int) Math.ceil(horasVoo(aerovia.getExtensao(), velocidadeCruzeiro));
+        final LocalDateTime dataHoraFinalVoo = dataHoraPartida.plusHours(horasVoo);
 
-        List<SlotHorario> slotsHorariosLivres = new LinkedList<SlotHorario>();
-
-        return slotsHorariosLivres;
-    }
-
-    public List<Aerovia> comProblema(){
-        return new LinkedList<Aerovia>();
-    }
-
-    public void desocuparSlotHorario(Aerovia aerovia, float altitude, LocalDateTime dataHoraPartida, float velocidadeCruzeiro) {
-
-        int horas = 1; //caclculo de quantas horas vai ocupar
-
-        //verificar se aerovia e alterada aqui
-        aerovia.getSlotsHorarios().stream()
+        return aerovia.getSlotsHorarios()
+                .stream()
                 .filter(slotHorario -> {
-                    return true; //condicao para slotOcupado daquela hora e daquela altitude
-                }).findAny().ifPresent(slotHorario -> {
-                    slotHorario.setOcupado(false);
-                });
+                    return slotHorario.getDataHora().isBefore(dataHoraPartida)
+                            && slotHorario.getDataHora().isAfter(dataHoraFinalVoo);
+                })
+                .toList();
+    }
 
-        repository.update(aerovia);
+    public void ocupaSlotHorario(List<Aerovia> aerovias, LocalDateTime dataHora, float altitude,
+            float velocidadeCruzeiro) {
+
+        for (Aerovia aerovia : aerovias) {
+
+            final int horasVoo = (int) Math.ceil(horasVoo(aerovia.getExtensao(), velocidadeCruzeiro));
+
+            for (int i = 0; i < horasVoo; i++) {
+                aerovia.getSlotsHorarios().add(new SlotHorario(altitude, dataHora.plusHours(i))); // verificar se mantem
+                                                                                                  // a referencia de
+                                                                                                  // memoria
+            }
+
+            repository.update(aerovia);
+        }
+    }
+
+    public void desocupaSlotHorario(List<Aerovia> aerovias, LocalDateTime dataHora, float altitude,
+            float velocidadeCruzeiro) {
+        for (Aerovia aerovia : aerovias) {
+
+            final int horasVoo = (int) Math.ceil(horasVoo(aerovia.getExtensao(), velocidadeCruzeiro));
+
+            for (int i = 0; i < horasVoo; i++) {
+
+                final LocalDateTime dataHoraSlot = dataHora.plusHours(i);
+
+                List<SlotHorario> slotsARemover = aerovia.getSlotsHorarios()
+                        .stream()
+                        .filter(slotHorario -> {
+                            return slotHorario.getAltitude() == altitude
+                                    && slotHorario.getDataHora().isEqual(dataHoraSlot);
+                        })
+                        .toList();
+
+                // verificar se mantem a referencia de memoria
+                aerovia.getSlotsHorarios().removeAll(slotsARemover);
+            }
+
+            repository.update(aerovia);
+        }
+    }
+
+    public List<SlotHorario> ocupacaoPorData(LocalDate data) {
+        List<SlotHorario> ocupacao = new ArrayList<SlotHorario>();
+
+        // deixar no dominio? ou trazer todas para aplicacao filtrar?
+
+        return ocupacao;
+    }
+
+    private float horasVoo(float extensaoAerovia, float velocidadeCruzeiro) {
+        return extensaoAerovia / velocidadeCruzeiro;
     }
 
 }

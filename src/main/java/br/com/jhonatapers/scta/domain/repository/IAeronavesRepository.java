@@ -6,8 +6,4 @@ public interface IAeronavesRepository {
     
     public Aeronave findByPrefixo(String prefixo);
 
-    public Aeronave save(Aeronave aeronave);
-
-    public void remove(Aeronave aeronave);
-
 }

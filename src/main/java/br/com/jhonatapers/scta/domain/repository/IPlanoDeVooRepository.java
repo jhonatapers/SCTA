@@ -1,15 +1,19 @@
 package br.com.jhonatapers.scta.domain.repository;
 
+import java.util.List;
+
 import br.com.jhonatapers.scta.domain.entity.PlanoDeVoo;
 
 public interface IPlanoDeVooRepository {
     
     public PlanoDeVoo findById(long id);
 
-    public PlanoDeVoo save(PlanoDeVoo aeronave);
+    public List<PlanoDeVoo> findAll();
 
-    public PlanoDeVoo update(PlanoDeVoo aeronave);
+    public PlanoDeVoo save(PlanoDeVoo planoDeVoo);
 
-    public void remove(PlanoDeVoo aeronave);
+    public PlanoDeVoo update(PlanoDeVoo planoDeVoo);
+
+    public void remove(PlanoDeVoo planoDeVoo);
 
 }
