@@ -9,13 +9,16 @@ import javax.persistence.OneToOne;
 public class Aeroporto {
 
     @Id
-    private final String codigoAeroporturario; 
+    private String codigoAeroporturario;
 
     private String nome;
 
     @OneToOne
     @JoinColumn(name = "referencia_id", referencedColumnName = "id")
     private ReferenciaGeografica coordenada;
+
+    public Aeroporto() {
+    }
 
     public Aeroporto(String codigoAeroporturario, String nome, ReferenciaGeografica coordenada) {
         this.codigoAeroporturario = codigoAeroporturario;

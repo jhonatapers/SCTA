@@ -24,6 +24,9 @@ public class PlanoDeVoo {
 
     private boolean cancelado;
 
+    public PlanoDeVoo() {
+    }
+
     public PlanoDeVoo(LocalDateTime data, Rota rota, float altitude, float velocidadeCruzeiro) {
         this.dataHora = data;
         this.rota = rota;

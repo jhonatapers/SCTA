@@ -12,7 +12,7 @@ public class Aerovia { // aerovia 1 // ref 1 // ref 2
                        // aerovia 2 // ref 1 // ref 3
 
     @Id
-    private final String nome;
+    private String nome;
 
 
     @ManyToOne
@@ -25,6 +25,9 @@ public class Aerovia { // aerovia 1 // ref 1 // ref 2
 
     @OneToMany
     private List<SlotHorario> slotsHorarios;
+
+    public Aerovia() {
+    }
 
     public Aerovia(String nome, ReferenciaGeografica extremoInicio, ReferenciaGeografica extremoFinal, float extensao) {
         this.nome = nome;

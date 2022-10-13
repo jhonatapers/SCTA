@@ -15,6 +15,9 @@ public class Rota {
     @ManyToMany
     private List<Aerovia> aerovias;
 
+    public Rota() {
+    }
+
     public Rota(List<Aerovia> aerovias) {
         this.aerovias = aerovias;
     }

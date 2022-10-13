@@ -7,11 +7,14 @@ import javax.persistence.Id;
 public class ReferenciaGeografica {
 
     @Id
-    private final String nome;
+    private String nome;
 
-    private final long latitude;
+    private long latitude;
 
-    private final long longitude;
+    private long longitude;
+
+    public ReferenciaGeografica() {
+    }
 
     public ReferenciaGeografica(String nome, long latitude, long longitude) {
         this.nome = nome;

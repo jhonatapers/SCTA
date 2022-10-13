@@ -7,9 +7,12 @@ import javax.persistence.Id;
 public class Aeronave {
 
     @Id
-    private final String prefixo;
+    private String prefixo;
 
     private float velocidadeCruzeiro;
+
+    public Aeronave() {
+    }
 
     public Aeronave(String prefixo, float velocidadeCruzeiro) {
         this.prefixo = prefixo;
