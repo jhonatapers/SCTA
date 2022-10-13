@@ -1,7 +1,9 @@
 package br.com.jhonatapers.scta.domain.aggregate;
 
+import javax.persistence.Entity;
 import java.time.LocalDateTime;
 
+@Entity
 public class SlotHorario {
 
     private float altitude;

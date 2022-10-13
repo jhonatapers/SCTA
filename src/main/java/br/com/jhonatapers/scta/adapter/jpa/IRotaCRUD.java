@@ -1,4 +1,4 @@
-package br.com.jhonatapers.scta.adapter.repository;
+package br.com.jhonatapers.scta.adapter.jpa;
 
 import java.util.List;
 

@@ -17,7 +17,8 @@ public class AeroviaService {
     private IAeroviaRepository repository;
 
     public Aerovia buscar(String nome) {
-        return repository.findByNome(nome);
+        return repository.findByNome(nome)
+                .orElseThrow(() -> new RuntimeException("Aerovia não encontrada"));
     }
 
     public List<SlotHorario> slotsOcupados(Aerovia aerovia, LocalDateTime dataHoraPartida, float velocidadeCruzeiro) {

@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class PlanoDeVoo {
@@ -13,6 +15,7 @@ public class PlanoDeVoo {
 
     private LocalDateTime dataHora;
 
+    @ManyToOne
     private Rota rota;
 
     private float altitude;

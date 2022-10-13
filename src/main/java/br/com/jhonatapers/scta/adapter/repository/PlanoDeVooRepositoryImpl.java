@@ -3,11 +3,15 @@ package br.com.jhonatapers.scta.adapter.repository;
 import java.util.List;
 import java.util.Optional;
 
+import br.com.jhonatapers.scta.adapter.jpa.IPlanoDeVooCRUD;
+import br.com.jhonatapers.scta.domain.repository.IPlanoDeVooRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.jhonatapers.scta.domain.entity.PlanoDeVoo;
+import org.springframework.stereotype.Component;
 
-public class PlanoDeVooRepositoryImpl {
+@Component
+public class PlanoDeVooRepositoryImpl implements IPlanoDeVooRepository {
 
     private IPlanoDeVooCRUD planoDeVooCRUD;
 
@@ -33,6 +37,6 @@ public class PlanoDeVooRepositoryImpl {
     }
 
     public void remove(PlanoDeVoo planoDeVoo) {
-        return planoDeVoo.remove(planoDeVoo);
+        planoDeVooCRUD.remove(planoDeVoo);
     }
 }

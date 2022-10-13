@@ -1,6 +1,7 @@
 package br.com.jhonatapers.scta.domain.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,9 +17,9 @@ public class PlanoDeVooService {
     private RotasService rotasService;
 
     public PlanoDeVoo cadastrar(PlanoDeVoo planoDeVoo) {
-        PlanoDeVoo _planoDeVoo = buscar(planoDeVoo.getId());
+        Optional<PlanoDeVoo> _planoDeVoo = repository.findById(planoDeVoo.getId());
 
-        if (_planoDeVoo == null) {
+        if (_planoDeVoo.isEmpty()) {
             if (verificar(planoDeVoo)) {
                 rotasService.ocupaRota(
                         planoDeVoo.getRota(),
@@ -26,31 +27,30 @@ public class PlanoDeVooService {
                         planoDeVoo.getAltitude(),
                         planoDeVoo.getVelocidadeCruzeiro());
 
-                _planoDeVoo = repository.save(planoDeVoo);
+                return repository.save(planoDeVoo);
             }
         }
 
-        return _planoDeVoo;
+        return _planoDeVoo.get();
     }
 
     public void cancelar(PlanoDeVoo planoDeVoo) {
         PlanoDeVoo _planoDeVoo = buscar(planoDeVoo.getId());
 
-        if (_planoDeVoo != null) {
-            rotasService.desocupaRota(
-                    _planoDeVoo.getRota(),
-                    _planoDeVoo.getDataHora(),
-                    _planoDeVoo.getAltitude(),
-                    _planoDeVoo.getVelocidadeCruzeiro());
+        rotasService.desocupaRota(
+                _planoDeVoo.getRota(),
+                _planoDeVoo.getDataHora(),
+                _planoDeVoo.getAltitude(),
+                _planoDeVoo.getVelocidadeCruzeiro());
 
-            _planoDeVoo.setCancelado(true);
+        _planoDeVoo.setCancelado(true);
 
-            repository.update(_planoDeVoo);
-        }
+        repository.update(_planoDeVoo);
     }
 
     public PlanoDeVoo buscar(long id) {
-        return repository.findById(id);
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Plano de Voo não encontrado"));
     }
 
     public List<PlanoDeVoo> todos() {

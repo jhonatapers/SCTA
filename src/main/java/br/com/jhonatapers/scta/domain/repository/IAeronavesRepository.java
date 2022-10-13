@@ -2,8 +2,10 @@ package br.com.jhonatapers.scta.domain.repository;
 
 import br.com.jhonatapers.scta.domain.entity.Aeronave;
 
+import java.util.Optional;
+
 public interface IAeronavesRepository {
     
-    public Aeronave findByPrefixo(String prefixo);
+    Optional<Aeronave> findByPrefixo(String prefixo);
 
 }

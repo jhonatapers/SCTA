@@ -4,21 +4,30 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import br.com.jhonatapers.scta.domain.aggregate.SlotHorario;
 
 @Entity
-public class Aerovia {
+public class Aerovia { // aerovia 1 // ref 1 // ref 2
+                       // aerovia 2 // ref 1 // ref 3
 
     @Id
     private final String nome;
 
+
+    @ManyToOne
     private ReferenciaGeografica extremoInicio;
 
+    @ManyToOne
     private ReferenciaGeografica extremoFinal;
 
     private float extensao;
 
+    @OneToMany
     private List<SlotHorario> slotsHorarios;
 
     public Aerovia(String nome, ReferenciaGeografica extremoInicio, ReferenciaGeografica extremoFinal, float extensao) {

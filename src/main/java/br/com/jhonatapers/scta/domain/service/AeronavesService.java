@@ -11,7 +11,8 @@ public class AeronavesService {
     private IAeronavesRepository repository;
 
     public Aeronave buscar(String prefixo) {
-        return repository.findByPrefixo(prefixo);
+        return repository.findByPrefixo(prefixo)
+                .orElseThrow(() -> new RuntimeException("Não achei"));
     }
 
 }
