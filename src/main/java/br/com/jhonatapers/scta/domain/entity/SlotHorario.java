@@ -1,4 +1,4 @@
-package br.com.jhonatapers.scta.domain.aggregate;
+package br.com.jhonatapers.scta.domain.entity;
 
 import javax.persistence.Entity;
 import java.time.LocalDateTime;

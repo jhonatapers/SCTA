@@ -8,7 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.jhonatapers.scta.domain.entity.Aerovia;
-import br.com.jhonatapers.scta.domain.aggregate.SlotHorario;
+import br.com.jhonatapers.scta.domain.entity.SlotHorario;
 import br.com.jhonatapers.scta.domain.repository.IAeroviaRepository;
 
 public class AeroviaService {
