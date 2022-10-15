@@ -11,7 +11,7 @@ public class ReferenciaGeografica {
 
     private long latitude;
 
-    private long longitude;
+    private  long longitude;
 
     public ReferenciaGeografica() {
     }

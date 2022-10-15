@@ -14,7 +14,7 @@ public class Aeroporto {
     private String nome;
 
     @OneToOne
-    @JoinColumn(name = "referencia_id", referencedColumnName = "id")
+    @JoinColumn(name = "referencia_id", referencedColumnName = "nome")
     private ReferenciaGeografica coordenada;
 
     public Aeroporto() {

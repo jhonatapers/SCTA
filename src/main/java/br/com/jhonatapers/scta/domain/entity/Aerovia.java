@@ -14,7 +14,6 @@ public class Aerovia { // aerovia 1 // ref 1 // ref 2
     @Id
     private String nome;
 
-
     @ManyToOne
     private ReferenciaGeografica extremoInicio;
 
