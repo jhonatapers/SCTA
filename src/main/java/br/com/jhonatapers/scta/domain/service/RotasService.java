@@ -37,31 +37,22 @@ public class RotasService {
 
         List<Rota> rotasNaOrigem = rotas
                 .stream()
-                .filter(rota -> {
-                    return rota.getAerovias()
-                            .stream()
-                            .filter(aerovia -> {
-                                return aerovia.getExtremoFinal().equals(refOrigem)
-                                        || aerovia.getExtremoInicio().equals(refOrigem);
-                            })
-                            .findFirst()
-                            .isPresent();
-                })
+                .filter(rota -> rota.getAerovias()
+                        .stream()
+                        .filter(aerovia -> aerovia.getExtremoFinal().equals(refOrigem)
+                                || aerovia.getExtremoInicio().equals(refOrigem))
+                        .findFirst()
+                        .isPresent())
                 .toList();
 
         List<Rota> interseccaoRotas = rotasNaOrigem
                 .stream()
-                .filter(rota -> {
-                    return rota.getAerovias()
-                            .stream()
-                            .filter(aerovia -> {
-                                return aerovia.getExtremoFinal().equals(refDestino)
-                                        || aerovia.getExtremoInicio().equals(refDestino);
-                            })
-                            .filter(null)
-                            .findFirst()
-                            .isPresent();
-                }).toList();
+                .filter(rota -> rota.getAerovias()
+                        .stream()
+                        .filter(aerovia -> aerovia.getExtremoFinal().equals(refDestino)
+                                || aerovia.getExtremoInicio().equals(refDestino))
+                        .findFirst()
+                        .isPresent()).toList();
 
         return interseccaoRotas;
     }

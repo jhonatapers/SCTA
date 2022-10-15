@@ -33,19 +33,20 @@ insert into aerovia values ('AV5', 1000, 'R34', 'R51');
 
 
 -- GRU -> SDU
-insert into rota values (1)
+insert into rota values (1);
 
-    insert into rota_aerovias (1, 'AV1')
-insert into rota_aerovias (1, 'AV2')
-insert into rota_aerovias (1, 'AV3')
+insert into rota_aerovias VALUES (1, 'AV1');
+insert into rota_aerovias values (1, 'AV2');
+insert into rota_aerovias VALUES (1, 'AV3');
 
-    -- GRU -> SDU
-insert into rota values (2)
+-- GRU -> SDU
+insert into rota values (2);
 
 
-insert into rota_aerovias (2, 'AV4')
-insert into rota_aerovias (2, 'AV5')
-insert into rota_aerovias (2, 'AV3')
+insert into rota_aerovias VALUES (2, 'AV4');
+insert into rota_aerovias VALUES (2, 'AV5');
+insert into rota_aerovias VALUES (2, 'AV3');
+
 
 insert into aerovia values ('AV1', 1000, 'C1', 'C22');
 insert into aerovia values ('AV1', 1000, 'C1', 'C22');
