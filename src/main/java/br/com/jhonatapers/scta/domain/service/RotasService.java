@@ -3,8 +3,6 @@ package br.com.jhonatapers.scta.domain.service;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import br.com.jhonatapers.scta.domain.entity.Aeroporto;
 import br.com.jhonatapers.scta.domain.entity.ReferenciaGeografica;
 import br.com.jhonatapers.scta.domain.entity.Rota;
@@ -19,9 +17,12 @@ public class RotasService {
     private AeroportoService aeroportoService;
 
 
-    public RotasService(AeroviaService aeroviaService, IRotaRepository repository) {
+    public RotasService(AeroviaService aeroviaService,
+                        IRotaRepository repository,
+                        AeroportoService aeroportoService) {
         this.aeroviaService = aeroviaService;
         this.repository = repository;
+        this.aeroportoService = aeroportoService;
     }
 
     public List<Rota> consultarEntreAeroportos(String codigoAeroportuarioOrigem, String codigoAeroportuarioDestino) {

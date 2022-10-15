@@ -13,8 +13,11 @@ import br.com.jhonatapers.scta.domain.repository.IAeroviaRepository;
 
 public class AeroviaService {
 
-    @Autowired
-    private IAeroviaRepository repository;
+    private final IAeroviaRepository repository;
+
+    public AeroviaService(IAeroviaRepository repository) {
+        this.repository = repository;
+    }
 
     public Aerovia buscar(String nome) {
         return repository.findByNome(nome)
