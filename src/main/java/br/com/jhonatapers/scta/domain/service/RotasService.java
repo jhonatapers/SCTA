@@ -12,13 +12,22 @@ import br.com.jhonatapers.scta.domain.repository.IRotaRepository;
 
 public class RotasService {
 
-    @Autowired
     AeroviaService aeroviaService;
 
-    @Autowired
     IRotaRepository repository;
 
-    public List<Rota> consultarEntreAeroportos(Aeroporto aeroportoOrigem, Aeroporto aeroportoDestino) {
+    private AeroportoService aeroportoService;
+
+
+    public RotasService(AeroviaService aeroviaService, IRotaRepository repository) {
+        this.aeroviaService = aeroviaService;
+        this.repository = repository;
+    }
+
+    public List<Rota> consultarEntreAeroportos(String codigoAeroportuarioOrigem, String codigoAeroportuarioDestino) {
+
+        final Aeroporto aeroportoOrigem = aeroportoService.buscar(codigoAeroportuarioOrigem);
+        final Aeroporto aeroportoDestino = aeroportoService.buscar(codigoAeroportuarioDestino);
 
         List<Rota> rotas = repository.findAll();
 

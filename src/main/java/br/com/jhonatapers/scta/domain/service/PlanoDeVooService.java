@@ -45,7 +45,7 @@ public class PlanoDeVooService {
 
         _planoDeVoo.setCancelado(true);
 
-        repository.update(_planoDeVoo);
+        repository.save(_planoDeVoo);
     }
 
     public PlanoDeVoo buscar(long id) {

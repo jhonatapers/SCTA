@@ -7,14 +7,10 @@ import br.com.jhonatapers.scta.domain.entity.PlanoDeVoo;
 
 public interface IPlanoDeVooRepository {
     
-    public Optional<PlanoDeVoo> findById(long id);
+    Optional<PlanoDeVoo> findById(long id);
 
-    public List<PlanoDeVoo> findAll();
+    List<PlanoDeVoo> findAll();
 
-    public PlanoDeVoo save(PlanoDeVoo planoDeVoo);
-
-    public PlanoDeVoo update(PlanoDeVoo planoDeVoo);
-
-    public void remove(PlanoDeVoo planoDeVoo);
+    PlanoDeVoo save(PlanoDeVoo planoDeVoo);
 
 }

@@ -31,12 +31,4 @@ public class PlanoDeVooRepositoryImpl implements IPlanoDeVooRepository {
     public PlanoDeVoo save(PlanoDeVoo planoDeVoo) {
         return planoDeVooCRUD.save(planoDeVoo);
     }
-
-    public PlanoDeVoo update(PlanoDeVoo planoDeVoo) {
-        return planoDeVooCRUD.update(planoDeVoo);
-    }
-
-    public void remove(PlanoDeVoo planoDeVoo) {
-        planoDeVooCRUD.remove(planoDeVoo);
-    }
 }

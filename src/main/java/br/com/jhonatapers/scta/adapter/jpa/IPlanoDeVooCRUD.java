@@ -13,7 +13,5 @@ public interface IPlanoDeVooCRUD extends CrudRepository<PlanoDeVoo, Long> {
 
     Optional<PlanoDeVoo> findById(long id);
 
-    PlanoDeVoo update(PlanoDeVoo planoDeVoo);
 
-    PlanoDeVoo remove(PlanoDeVoo remove);
 }
