@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import br.com.jhonatapers.scta.domain.dto.ValidacaoPlanoDeVooDto;
 import br.com.jhonatapers.scta.domain.entity.PlanoDeVoo;
 import br.com.jhonatapers.scta.domain.repository.IPlanoDeVooRepository;
 
@@ -16,11 +17,14 @@ public class PlanoDeVooService {
     @Autowired
     private RotasService rotasService;
 
+    @Autowired
+    private AeroviaService aeroviaService;
+
     public PlanoDeVoo cadastrar(PlanoDeVoo planoDeVoo) {
         Optional<PlanoDeVoo> _planoDeVoo = repository.findById(planoDeVoo.getId());
 
         if (_planoDeVoo.isEmpty()) {
-            if (verificar(planoDeVoo)) {
+            if (verificar(planoDeVoo).isValid()) {
                 rotasService.ocupaRota(
                         planoDeVoo.getRota(),
                         planoDeVoo.getDataHora(),
@@ -57,8 +61,25 @@ public class PlanoDeVooService {
         return repository.findAll();
     }
 
-    public boolean verificar(PlanoDeVoo planoDeVoo) {
-        return true;//esperar email
+    public ValidacaoPlanoDeVooDto verificar(PlanoDeVoo planoDeVoo) {
+
+        ValidacaoPlanoDeVooDto validacaoPlanoDeVooDto = new ValidacaoPlanoDeVooDto();
+
+        if (planoDeVoo.getAltitude() > 35000 || planoDeVoo.getAltitude() < 25000)
+            validacaoPlanoDeVooDto.addProblema("Altitude invalida");
+
+        if (planoDeVoo.getVelocidadeCruzeiro() < 1) {
+            validacaoPlanoDeVooDto.addProblema("Velocidade de cruzeiro invalida");
+        } else {
+
+            for (String problema : aeroviaService.validacao(planoDeVoo.getRota().getAerovias(),
+                    planoDeVoo.getAeroportoOrigem().getCoordenada(), planoDeVoo.getDataHora(),
+                    planoDeVoo.getAltitude(), planoDeVoo.getVelocidadeCruzeiro())) {
+                validacaoPlanoDeVooDto.addProblema(problema);
+            }
+        }
+
+        return validacaoPlanoDeVooDto;
     }
 
 }

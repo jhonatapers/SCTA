@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.jhonatapers.scta.domain.entity.Aerovia;
+import br.com.jhonatapers.scta.domain.entity.ReferenciaGeografica;
 import br.com.jhonatapers.scta.domain.entity.SlotHorario;
 import br.com.jhonatapers.scta.domain.repository.IAeroviaRepository;
 
@@ -20,6 +21,42 @@ public class AeroviaService {
     public Aerovia buscar(String nome) {
         return repository.findByNome(nome)
                 .orElseThrow(() -> new RuntimeException("Aerovia não encontrada"));
+    }
+
+    public List<String> validacao(List<Aerovia> aerovias, ReferenciaGeografica origem, LocalDateTime dataHoraPartida,
+            float altitude,
+            float velocidadeCruzeiro) {
+
+        return problemas(new ArrayList<String>(), origem, dataHoraPartida, altitude, velocidadeCruzeiro, aerovias);
+    }
+
+    private List<String> problemas(List<String> problemas, ReferenciaGeografica partida, LocalDateTime dataHoraPartida,
+            float altitude,
+            float velocidadeCruzeiro, List<Aerovia> aerovias) {
+
+        aerovias.stream()
+                .filter(aerovia -> aerovia.getExtremoFinal().equals(partida)
+                        || aerovia.getExtremoInicio().equals(partida))
+                .findFirst()
+                .ifPresent(aerovia -> {
+
+                    if (!slotsOcupados(aerovia, dataHoraPartida, velocidadeCruzeiro).isEmpty())
+                        problemas.add("Aerovia " + aerovia.getNome() + " ocupada.");
+
+                    if (aerovia.getExtremoFinal().equals(partida)) {
+                        problemas.addAll(problemas(problemas, aerovia.getExtremoInicio(),
+                                dataHoraPartida.plusHours(
+                                        (long) Math.ceil(horasVoo(aerovia.getExtensao(), velocidadeCruzeiro))),
+                                altitude,
+                                velocidadeCruzeiro, aerovias));
+
+                    } else {
+                        problemas.addAll(problemas(problemas, aerovia.getExtremoFinal(), dataHoraPartida, altitude,
+                                velocidadeCruzeiro, aerovias));
+                    }
+                });
+
+        return problemas;
     }
 
     public List<SlotHorario> slotsOcupados(Aerovia aerovia, LocalDateTime dataHoraPartida, float velocidadeCruzeiro) {

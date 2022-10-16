@@ -15,6 +15,12 @@ public class PlanoDeVoo {
     private LocalDateTime dataHora;
 
     @ManyToOne
+    private Aeroporto aeroportoOrigem;
+
+    @ManyToOne
+    private Aeroporto aeroportoDestino;
+
+    @ManyToOne
     private Rota rota;
 
     private float altitude;
@@ -43,6 +49,22 @@ public class PlanoDeVoo {
 
     public void setDataHora(LocalDateTime data) {
         this.dataHora = data;
+    }
+
+    public Aeroporto getAeroportoOrigem() {
+        return aeroportoOrigem;
+    }
+
+    public void setAeroportoOrigem(Aeroporto aeroportoOrigem) {
+        this.aeroportoOrigem = aeroportoOrigem;
+    }
+
+    public Aeroporto getAeroportoDestino() {
+        return aeroportoDestino;
+    }
+
+    public void setAeroportoDestino(Aeroporto aeroportoDestino) {
+        this.aeroportoDestino = aeroportoDestino;
     }
 
     public Rota getRota() {
