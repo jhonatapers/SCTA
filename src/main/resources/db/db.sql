@@ -54,22 +54,178 @@ insert into aerovia values ('AV26', 1000, 'R55', 'R53');
 insert into aerovia values ('AV27', 1000, 'R55', 'R73');
 insert into aerovia values ('AV28', 1000, 'R53', 'R73');
 insert into aerovia values ('AV29', 1000, 'R84', 'R73');
-insert into aerovia values ('AV30', 1000, 'R34', 'R46');
-
+--insert into aerovia values ('AV30', 1000, 'R34', 'R46');
 
 
 -- GRU -> SDU
 insert into rota values (1);
-
 insert into rota_aerovias VALUES (1, 'AV1');
 insert into rota_aerovias values (1, 'AV2');
 insert into rota_aerovias VALUES (1, 'AV3');
 
 -- GRU -> SDU
 insert into rota values (2);
-
 insert into rota_aerovias VALUES (2, 'AV4');
 insert into rota_aerovias VALUES (2, 'AV5');
 insert into rota_aerovias VALUES (2, 'AV3');
 
+-- GRU -> CGB
+insert into rota values (3);
+insert into rota_aerovias values (3, 'AV14');
+insert into rota_aerovias values (3, 'AV15');
 
+-- GRU -> CGB
+insert into rota values (4);
+insert into rota_aerovias values (4, 'AV4');
+insert into rota_aerovias values (4, 'AV16');
+
+-- GRU -> RBR
+insert into rota values (5);
+insert into rota_aerovias values (5, 'AV13');
+
+-- GRU -> RBR
+insert into rota values (6);
+insert into rota_aerovias values (6, 'AV4');
+insert into rota_aerovias values (6, 'AV18');
+
+-- GRU -> CGH
+insert into rota values (7);
+insert into rota_aerovias values (7, 'AV4');
+insert into rota_aerovias values (7, 'AV17');
+
+-- GRU -> CGH
+insert into rota values (8);
+insert into rota_aerovias values (8, 'AV1');
+insert into rota_aerovias values (8, 'AV7');
+
+-- GRU -> CGH
+insert into rota values (9);
+insert into rota_aerovias values (9, 'AV1');
+insert into rota_aerovias values (9, 'AV2');
+insert into rota_aerovias values (9, 'AV8');
+
+-- GRU -> CGH
+insert into rota values (10);
+insert into rota_aerovias values (10, 'AV4');
+insert into rota_aerovias values (10, 'AV5');
+insert into rota_aerovias values (10, 'AV8');
+
+-- SDU -> CGH
+insert into rota values (11);
+insert into rota_aerovias values (11, 'AV3');
+insert into rota_aerovias values (11, 'AV8');
+
+-- SDU -> CGH
+insert into rota values (12);
+insert into rota_aerovias values (12, 'AV9');
+insert into rota_aerovias values (12, 'AV28');
+
+-- SDU -> CGH
+insert into rota values (13);
+insert into rota_aerovias values (13, 'AV9');
+insert into rota_aerovias values (13, 'AV6');
+insert into rota_aerovias values (13, 'AV8');
+
+-- SDU -> CGH
+insert into rota values (14);
+insert into rota_aerovias values (14, 'AV3');
+insert into rota_aerovias values (14, 'AV2');
+insert into rota_aerovias values (14, 'AV7');
+
+-- SDU -> CGH
+insert into rota values (16);
+insert into rota_aerovias values (16, 'AV3');
+insert into rota_aerovias values (16, 'AV5');
+insert into rota_aerovias values (16, 'AV17');
+
+-- SDU -> CGH
+insert into rota values (17);
+insert into rota_aerovias values (17, 'AV9');
+insert into rota_aerovias values (17, 'AV23');
+insert into rota_aerovias values (17, 'AV24');
+
+-- SDU -> POA
+insert into rota values (18);
+insert into rota_aerovias values (18, 'AV11');
+insert into rota_aerovias values (18, 'AV12');
+
+-- SDU -> POA
+insert into rota values (19);
+insert into rota_aerovias values (19, 'AV10');
+
+-- SDU -> POA
+insert into rota values (20);
+insert into rota_aerovias values (20, 'AV9');
+insert into rota_aerovias values (20, 'AV29');
+
+-- SDU -> POA
+insert into rota values (21);
+insert into rota_aerovias values (21, 'AV9');
+insert into rota_aerovias values (21, 'AV23');
+insert into rota_aerovias values (21, 'AV22');
+
+-- SDU -> POA
+insert into rota values (22);
+insert into rota_aerovias values (22, 'AV3');
+insert into rota_aerovias values (22, 'AV6');
+insert into rota_aerovias values (22, 'AV29');
+
+-- SDU -> POA
+insert into rota values (23);
+insert into rota_aerovias values (23, 'AV3');
+insert into rota_aerovias values (23, 'AV6');
+insert into rota_aerovias values (23, 'AV23');
+insert into rota_aerovias values (23, 'AV22');
+
+-- SDU -> RBR
+insert into rota values (24);
+insert into rota_aerovias values (24, 'AV3');
+insert into rota_aerovias values (24, 'AV5');
+insert into rota_aerovias values (24, 'AV18');
+
+-- SDU -> RBR
+insert into rota values (25);
+insert into rota_aerovias values (25, 'AV3');
+insert into rota_aerovias values (25, 'AV6');
+insert into rota_aerovias values (25, 'AV27');
+
+-- SDU -> RBR
+insert into rota values (26);
+insert into rota_aerovias values (26, 'AV9');
+insert into rota_aerovias values (26, 'AV23');
+insert into rota_aerovias values (26, 'AV25');
+
+-- SDU -> RBR
+insert into rota values (27);
+insert into rota_aerovias values (27, 'AV9');
+insert into rota_aerovias values (27, 'AV23');
+insert into rota_aerovias values (27, 'AV21');
+insert into rota_aerovias values (27, 'AV19');
+
+-- SDU -> CGB
+insert into rota values (28);
+insert into rota_aerovias values (28, 'AV3');
+insert into rota_aerovias values (28, 'AV5');
+insert into rota_aerovias values (28, 'AV16');
+
+-- SDU -> CGB
+insert into rota values (29);
+insert into rota_aerovias values (29, 'AV9');
+insert into rota_aerovias values (29, 'AV23');
+insert into rota_aerovias values (29, 'AV21');
+insert into rota_aerovias values (29, 'AV20');
+
+-- SDU -> CGB
+insert into rota values (30);
+insert into rota_aerovias values (30, 'AV3');
+insert into rota_aerovias values (30, 'AV6');
+insert into rota_aerovias values (30, 'AV23');
+insert into rota_aerovias values (30, 'AV21');
+insert into rota_aerovias values (30, 'AV20');
+
+-- SDU -> CGB
+insert into rota values (31);
+insert into rota_aerovias values (31, 'AV9');
+insert into rota_aerovias values (31, 'AV6');
+insert into rota_aerovias values (31, 'AV5');
+insert into rota_aerovias values (31, 'AV16');
