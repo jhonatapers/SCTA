@@ -30,6 +30,32 @@ insert into aerovia values ('AV2', 1000, 'R31', 'R51');
 insert into aerovia values ('AV3', 1000, 'R51', 'R71');
 insert into aerovia values ('AV4', 1000, 'R22', 'R34');
 insert into aerovia values ('AV5', 1000, 'R34', 'R51');
+insert into aerovia values ('AV6', 1000, 'R51', 'R73');
+insert into aerovia values ('AV7', 1000, 'R31', 'R53');
+insert into aerovia values ('AV8', 1000, 'R51', 'R53');
+insert into aerovia values ('AV9', 1000, 'R71', 'R73');
+insert into aerovia values ('AV10', 1000, 'R71', 'R84');
+insert into aerovia values ('AV11', 1000, 'R71', 'R92');
+insert into aerovia values ('AV12', 1000, 'R92', 'R84');
+insert into aerovia values ('AV13', 1000, 'R22', 'R55');
+insert into aerovia values ('AV14', 1000, 'R22', 'R14');
+insert into aerovia values ('AV15', 1000, 'R14', 'R26');
+insert into aerovia values ('AV16', 1000, 'R26', 'R34');
+insert into aerovia values ('AV17', 1000, 'R34', 'R53');
+insert into aerovia values ('AV18', 1000, 'R34', 'R55');
+insert into aerovia values ('AV19', 1000, 'R55', 'R46');
+insert into aerovia values ('AV20', 1000, 'R46', 'R26');
+insert into aerovia values ('AV21', 1000, 'R46', 'R86');
+insert into aerovia values ('AV22', 1000, 'R86', 'R84');
+insert into aerovia values ('AV23', 1000, 'R86', 'R73');
+insert into aerovia values ('AV24', 1000, 'R86', 'R53');
+insert into aerovia values ('AV25', 1000, 'R86', 'R55');
+insert into aerovia values ('AV26', 1000, 'R55', 'R53');
+insert into aerovia values ('AV27', 1000, 'R55', 'R73');
+insert into aerovia values ('AV28', 1000, 'R53', 'R73');
+insert into aerovia values ('AV29', 1000, 'R84', 'R73');
+insert into aerovia values ('AV30', 1000, 'R34', 'R46');
+
 
 
 -- GRU -> SDU
@@ -42,34 +68,8 @@ insert into rota_aerovias VALUES (1, 'AV3');
 -- GRU -> SDU
 insert into rota values (2);
 
-
 insert into rota_aerovias VALUES (2, 'AV4');
 insert into rota_aerovias VALUES (2, 'AV5');
 insert into rota_aerovias VALUES (2, 'AV3');
 
 
-insert into aerovia values ('AV1', 1000, 'C1', 'C22');
-insert into aerovia values ('AV1', 1000, 'C1', 'C22');
-insert into aerovia values ('AV1', 1000, 'C1', 'C22');
-insert into aerovia values ('AV1', 1000, 'C1', 'C22');
-insert into aerovia values ('AV1', 1000, 'C1', 'C22');
-insert into aerovia values ('AV1', 1000, 'C1', 'C22');
-insert into aerovia values ('AV1', 1000, 'C1', 'C22');
-insert into aerovia values ('AV1', 1000, 'C1', 'C22');
-insert into aerovia values ('AV1', 1000, 'C1', 'C22');
-insert into aerovia values ('AV1', 1000, 'C1', 'C22');
-insert into aerovia values ('AV1', 1000, 'C1', 'C22');
-insert into aerovia values ('AV1', 1000, 'C1', 'C22');
-insert into aerovia values ('AV1', 1000, 'C1', 'C22');
-insert into aerovia values ('AV1', 1000, 'C1', 'C22');
-insert into aerovia values ('AV1', 1000, 'C1', 'C22');
-insert into aerovia values ('AV1', 1000, 'C1', 'C22');
-insert into aerovia values ('AV1', 1000, 'C1', 'C22');
-insert into aerovia values ('AV1', 1000, 'C1', 'C22');
-insert into aerovia values ('AV1', 1000, 'C1', 'C22');
-insert into aerovia values ('AV1', 1000, 'C1', 'C22');
-insert into aerovia values ('AV1', 1000, 'C1', 'C22');
-insert into aerovia values ('AV1', 1000, 'C1', 'C22');
-insert into aerovia values ('AV1', 1000, 'C1', 'C22');
-insert into aerovia values ('AV1', 1000, 'C1', 'C22');
-insert into aerovia values ('AV1', 1000, 'C1', 'C22');
