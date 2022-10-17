@@ -29,4 +29,10 @@ public class PlanosDeVooController {
     public PlanoDeVoo cadastrar(@RequestBody PlanoDeVoo planoDeVoo) {
         return planoDeVooService.cadastrar(planoDeVoo);
     }
+
+    @PostMapping("/cancelar")
+    public void concelar(@RequestBody PlanoDeVoo planoDeVoo) {
+        planoDeVooService.cancelar(planoDeVoo);
+    }
+
 }

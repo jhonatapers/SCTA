@@ -30,14 +30,15 @@ public class AeroviaService {
             float altitude,
             float velocidadeCruzeiro) {
 
-        return problemas(new ArrayList<String>(), origem, dataHoraPartida, altitude, velocidadeCruzeiro, aerovias, aerovias.size());
+        return problemas(new ArrayList<String>(), origem, dataHoraPartida, altitude, velocidadeCruzeiro, aerovias,
+                aerovias.size());
     }
 
     private List<String> problemas(List<String> problemas, ReferenciaGeografica partida, LocalDateTime dataHoraPartida,
             float altitude,
             float velocidadeCruzeiro, List<Aerovia> aerovias, final int nivel) {
 
-        if (nivel == 0 ) {
+        if (nivel == 0) {
             return problemas;
         }
 
@@ -77,8 +78,37 @@ public class AeroviaService {
         return aerovia.getSlotsHorarios()
                 .stream()
                 .filter(slotHorario -> slotHorario.getDataHora().isEqual(dataHoraPartida.truncatedTo(ChronoUnit.HOURS))
-                        || (slotHorario.getDataHora().isBefore(dataHoraFinalVoo) && slotHorario.getDataHora().isAfter(dataHoraPartida)))
+                        || (slotHorario.getDataHora().isBefore(dataHoraFinalVoo)
+                                && slotHorario.getDataHora().isAfter(dataHoraPartida)))
                 .toList();
+    }
+
+    public List<SlotHorario> slotsLivres(Aerovia aerovia, LocalDateTime dataHoraPartida, float velocidadeCruzeiro) {
+
+        List<SlotHorario> ocupados = slotsOcupados(aerovia, dataHoraPartida, velocidadeCruzeiro);
+
+        List<SlotHorario> desocupados = new ArrayList<SlotHorario>();
+
+        int horasVoo = (int) Math.ceil(horasVoo(aerovia.getExtensao(), velocidadeCruzeiro));
+
+        for (int i = 0; i < horasVoo; i++) {
+
+            LocalDateTime horaAux = dataHoraPartida.plusHours(i);
+
+            for (int j = 25; j < 35; j++) {
+
+                desocupados.add(new SlotHorario(j * 1000, horaAux));
+            }
+
+        }
+
+        for (SlotHorario ocupado : ocupados) {
+            desocupados.removeIf(
+                    d -> d.getAltitude() == ocupado.getAltitude() && d.getDataHora().isEqual(ocupado.getDataHora()));
+        }
+
+        return desocupados;
+
     }
 
     public void ocupaSlotHorario(List<Aerovia> aerovias, LocalDateTime dataHora, float altitude,
@@ -90,10 +120,11 @@ public class AeroviaService {
 
             for (int i = 0; i < horasVoo; i++) {
                 aerovia.getSlotsHorarios().add(
-                        slotHorarioService.cadastrar(new SlotHorario(altitude, dataHora.plusHours(i)))
-                ); // verificar se mantem
-                                                                                                  // a referencia de
-                                                                                                  // memoria
+                        slotHorarioService.cadastrar(new SlotHorario(altitude, dataHora.plusHours(i)))); // verificar se
+                                                                                                         // mantem
+                                                                                                         // a referencia
+                                                                                                         // de
+                                                                                                         // memoria
             }
 
             repository.update(aerovia);
