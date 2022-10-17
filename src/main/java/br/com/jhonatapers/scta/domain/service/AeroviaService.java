@@ -6,10 +6,13 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.jhonatapers.scta.domain.dto.OcupacaoPorAltitudeDTO;
 import br.com.jhonatapers.scta.domain.entity.Aerovia;
 import br.com.jhonatapers.scta.domain.entity.ReferenciaGeografica;
 import br.com.jhonatapers.scta.domain.entity.SlotHorario;
 import br.com.jhonatapers.scta.domain.repository.IAeroviaRepository;
+
+import static java.util.stream.Collectors.groupingBy;
 
 public class AeroviaService {
 
@@ -155,12 +158,15 @@ public class AeroviaService {
         }
     }
 
-    public List<SlotHorario> ocupacaoPorData(LocalDate data) {
-        List<SlotHorario> ocupacao = new ArrayList<SlotHorario>();
-
-        // deixar no dominio? ou trazer todas para aplicacao filtrar?
-
-        return ocupacao;
+    public List<OcupacaoPorAltitudeDTO> ocupacaoPorData(String nomeAerovia, LocalDate data) {
+        final List<SlotHorario> slotsAerovia = buscar(nomeAerovia).getSlotsHorarios();
+        return slotsAerovia.stream()
+                .filter(slotHorario -> slotHorario.getDataHora().toLocalDate().isEqual(data))
+                .collect(groupingBy(SlotHorario::getAltitude))
+                .entrySet()
+                .stream()
+                .map(entry -> OcupacaoPorAltitudeDTO.from(entry.getKey(), entry.getValue()))
+                .toList();
     }
 
     private float horasVoo(float extensaoAerovia, float velocidadeCruzeiro) {
