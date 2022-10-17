@@ -67,7 +67,7 @@ public class AeroviaService {
                     }
                 });
 
-        return problemas;
+        return problemas.stream().distinct().toList();
     }
 
     public List<SlotHorario> slotsOcupados(Aerovia aerovia, LocalDateTime dataHoraPartida, float velocidadeCruzeiro) {
