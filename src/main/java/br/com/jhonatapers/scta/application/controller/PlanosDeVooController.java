@@ -20,8 +20,13 @@ public class PlanosDeVooController {
         this.planoDeVooService = planoDeVooService;
     }
 
-    @PostMapping
+    @PostMapping("/verificar")
     public ValidacaoPlanoDeVooDto verificar(@RequestBody PlanoDeVoo planoDeVoo) {
         return planoDeVooService.verificar(planoDeVoo);
+    }
+
+    @PostMapping
+    public PlanoDeVoo cadastrar(@RequestBody PlanoDeVoo planoDeVoo) {
+        return planoDeVooService.cadastrar(planoDeVoo);
     }
 }

@@ -26,4 +26,8 @@ public class ValidacaoPlanoDeVooDto {
     public boolean isValid() {
         return isValid;
     }
+
+    public List<String> getProblemas() {
+        return problemas;
+    }
 }

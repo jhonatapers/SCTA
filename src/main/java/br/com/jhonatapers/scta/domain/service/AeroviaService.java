@@ -2,6 +2,7 @@ package br.com.jhonatapers.scta.domain.service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,9 +14,11 @@ import br.com.jhonatapers.scta.domain.repository.IAeroviaRepository;
 public class AeroviaService {
 
     private final IAeroviaRepository repository;
+    private final SlotHorarioService slotHorarioService;
 
-    public AeroviaService(IAeroviaRepository repository) {
+    public AeroviaService(IAeroviaRepository repository, SlotHorarioService slotHorarioService) {
         this.repository = repository;
+        this.slotHorarioService = slotHorarioService;
     }
 
     public Aerovia buscar(String nome) {
@@ -27,12 +30,16 @@ public class AeroviaService {
             float altitude,
             float velocidadeCruzeiro) {
 
-        return problemas(new ArrayList<String>(), origem, dataHoraPartida, altitude, velocidadeCruzeiro, aerovias);
+        return problemas(new ArrayList<String>(), origem, dataHoraPartida, altitude, velocidadeCruzeiro, aerovias, aerovias.size());
     }
 
     private List<String> problemas(List<String> problemas, ReferenciaGeografica partida, LocalDateTime dataHoraPartida,
             float altitude,
-            float velocidadeCruzeiro, List<Aerovia> aerovias) {
+            float velocidadeCruzeiro, List<Aerovia> aerovias, final int nivel) {
+
+        if (nivel == 0 ) {
+            return problemas;
+        }
 
         aerovias.stream()
                 .filter(aerovia -> aerovia.getExtremoFinal().equals(partida)
@@ -40,19 +47,23 @@ public class AeroviaService {
                 .findFirst()
                 .ifPresent(aerovia -> {
 
+                    aerovia = repository.findByNome(aerovia.getNome()).get();
+
                     if (!slotsOcupados(aerovia, dataHoraPartida, velocidadeCruzeiro).isEmpty())
                         problemas.add("Aerovia " + aerovia.getNome() + " ocupada.");
 
                     if (aerovia.getExtremoFinal().equals(partida)) {
-                        problemas.addAll(problemas(problemas, aerovia.getExtremoInicio(),
+                        List<String> list = problemas(problemas, aerovia.getExtremoInicio(),
                                 dataHoraPartida.plusHours(
                                         (long) Math.ceil(horasVoo(aerovia.getExtensao(), velocidadeCruzeiro))),
                                 altitude,
-                                velocidadeCruzeiro, aerovias));
+                                velocidadeCruzeiro, aerovias, nivel - 1);
+                        problemas.addAll(list);
 
                     } else {
-                        problemas.addAll(problemas(problemas, aerovia.getExtremoFinal(), dataHoraPartida, altitude,
-                                velocidadeCruzeiro, aerovias));
+                        List<String> list = problemas(problemas, aerovia.getExtremoFinal(), dataHoraPartida, altitude,
+                                velocidadeCruzeiro, aerovias, nivel - 1);
+                        problemas.addAll(list);
                     }
                 });
 
@@ -65,10 +76,8 @@ public class AeroviaService {
 
         return aerovia.getSlotsHorarios()
                 .stream()
-                .filter(slotHorario -> {
-                    return slotHorario.getDataHora().isBefore(dataHoraPartida)
-                            && slotHorario.getDataHora().isAfter(dataHoraFinalVoo);
-                })
+                .filter(slotHorario -> slotHorario.getDataHora().isEqual(dataHoraPartida.truncatedTo(ChronoUnit.HOURS))
+                        || (slotHorario.getDataHora().isBefore(dataHoraFinalVoo) && slotHorario.getDataHora().isAfter(dataHoraPartida)))
                 .toList();
     }
 
@@ -80,7 +89,9 @@ public class AeroviaService {
             final int horasVoo = (int) Math.ceil(horasVoo(aerovia.getExtensao(), velocidadeCruzeiro));
 
             for (int i = 0; i < horasVoo; i++) {
-                aerovia.getSlotsHorarios().add(new SlotHorario(altitude, dataHora.plusHours(i))); // verificar se mantem
+                aerovia.getSlotsHorarios().add(
+                        slotHorarioService.cadastrar(new SlotHorario(altitude, dataHora.plusHours(i)))
+                ); // verificar se mantem
                                                                                                   // a referencia de
                                                                                                   // memoria
             }

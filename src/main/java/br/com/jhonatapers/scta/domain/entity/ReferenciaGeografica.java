@@ -2,6 +2,7 @@ package br.com.jhonatapers.scta.domain.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.util.Objects;
 
 @Entity
 public class ReferenciaGeografica {
@@ -34,4 +35,15 @@ public class ReferenciaGeografica {
         return longitude;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ReferenciaGeografica that)) return false;
+        return nome.equals(that.nome);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nome);
+    }
 }

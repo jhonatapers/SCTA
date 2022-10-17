@@ -11,14 +11,17 @@ import br.com.jhonatapers.scta.domain.repository.IPlanoDeVooRepository;
 
 public class PlanoDeVooService {
 
-    @Autowired
-    private IPlanoDeVooRepository repository;
+    private final IPlanoDeVooRepository repository;
 
-    @Autowired
-    private RotasService rotasService;
+    private final RotasService rotasService;
 
-    @Autowired
-    private AeroviaService aeroviaService;
+    private final AeroviaService aeroviaService;
+
+    public PlanoDeVooService(IPlanoDeVooRepository repository, RotasService rotasService, AeroviaService aeroviaService) {
+        this.repository = repository;
+        this.rotasService = rotasService;
+        this.aeroviaService = aeroviaService;
+    }
 
     public PlanoDeVoo cadastrar(PlanoDeVoo planoDeVoo) {
         Optional<PlanoDeVoo> _planoDeVoo = repository.findById(planoDeVoo.getId());
