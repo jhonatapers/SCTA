@@ -3,8 +3,6 @@ package br.com.jhonatapers.scta.domain.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import br.com.jhonatapers.scta.domain.dto.ValidacaoPlanoDeVooDto;
 import br.com.jhonatapers.scta.domain.entity.PlanoDeVoo;
 import br.com.jhonatapers.scta.domain.repository.IPlanoDeVooRepository;
