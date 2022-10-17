@@ -143,10 +143,8 @@ public class AeroviaService {
 
                 List<SlotHorario> slotsARemover = aerovia.getSlotsHorarios()
                         .stream()
-                        .filter(slotHorario -> {
-                            return slotHorario.getAltitude() == altitude
-                                    && slotHorario.getDataHora().isEqual(dataHoraSlot);
-                        })
+                        .filter(slotHorario -> slotHorario.getAltitude() == altitude
+                                && slotHorario.getDataHora().isEqual(dataHoraSlot))
                         .toList();
 
                 // verificar se mantem a referencia de memoria

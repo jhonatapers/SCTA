@@ -3,6 +3,8 @@ package br.com.jhonatapers.scta.domain.entity;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
@@ -10,6 +12,7 @@ import javax.persistence.ManyToOne;
 public class PlanoDeVoo {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
     private LocalDateTime dataHora;

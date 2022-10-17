@@ -4,6 +4,8 @@ import br.com.jhonatapers.scta.domain.dto.ValidacaoPlanoDeVooDto;
 import br.com.jhonatapers.scta.domain.entity.PlanoDeVoo;
 import br.com.jhonatapers.scta.domain.service.PlanoDeVooService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,9 +32,9 @@ public class PlanosDeVooController {
         return planoDeVooService.cadastrar(planoDeVoo);
     }
 
-    @PostMapping("/cancelar")
-    public void concelar(@RequestBody PlanoDeVoo planoDeVoo) {
-        planoDeVooService.cancelar(planoDeVoo);
+    @DeleteMapping("/{idPlanoDeVoo}")
+    public void concelar(@PathVariable Long idPlanoDeVoo) {
+        planoDeVooService.cancelar(idPlanoDeVoo);
     }
 
 }

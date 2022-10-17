@@ -22,35 +22,36 @@ public class PlanoDeVooService {
     }
 
     public PlanoDeVoo cadastrar(PlanoDeVoo planoDeVoo) {
+        if (!verificar(planoDeVoo).isValid()) {
+            throw new RuntimeException("Plano de Voo inválido");
+        }
         Optional<PlanoDeVoo> _planoDeVoo = repository.findById(planoDeVoo.getId());
 
-        if (_planoDeVoo.isEmpty()) {
-            if (verificar(planoDeVoo).isValid()) {
-                rotasService.ocupaRota(
-                        planoDeVoo.getRota(),
-                        planoDeVoo.getDataHora(),
-                        planoDeVoo.getAltitude(),
-                        planoDeVoo.getVelocidadeCruzeiro());
-
-                return repository.save(planoDeVoo);
-            }
+        if (_planoDeVoo.isPresent()) {
+            planoDeVoo = _planoDeVoo.get();
+            planoDeVoo.setCancelado(false);
         }
+        rotasService.ocupaRota(
+                planoDeVoo.getRota(),
+                planoDeVoo.getDataHora(),
+                planoDeVoo.getAltitude(),
+                planoDeVoo.getVelocidadeCruzeiro());
 
-        return _planoDeVoo.get();
+        return repository.save(planoDeVoo);
     }
 
-    public void cancelar(PlanoDeVoo planoDeVoo) {
-        PlanoDeVoo _planoDeVoo = buscar(planoDeVoo.getId());
+    public void cancelar(Long idPlanoDeVoo) {
+        final PlanoDeVoo planoDeVoo = buscar(idPlanoDeVoo);
 
         rotasService.desocupaRota(
-                _planoDeVoo.getRota(),
-                _planoDeVoo.getDataHora(),
-                _planoDeVoo.getAltitude(),
-                _planoDeVoo.getVelocidadeCruzeiro());
+                planoDeVoo.getRota(),
+                planoDeVoo.getDataHora(),
+                planoDeVoo.getAltitude(),
+                planoDeVoo.getVelocidadeCruzeiro());
 
-        _planoDeVoo.setCancelado(true);
+        planoDeVoo.setCancelado(true);
 
-        repository.save(_planoDeVoo);
+        repository.save(planoDeVoo);
     }
 
     public PlanoDeVoo buscar(long id) {
