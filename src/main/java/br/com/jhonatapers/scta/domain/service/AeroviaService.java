@@ -85,9 +85,9 @@ public class AeroviaService {
 
     public List<SlotHorario> slotsLivres(Aerovia aerovia, LocalDateTime dataHoraPartida, float velocidadeCruzeiro) {
 
-        List<SlotHorario> ocupados = slotsOcupados(aerovia, dataHoraPartida, velocidadeCruzeiro);
+        List<SlotHorario> ocupados = slotsOcupados(buscar(aerovia.getNome()), dataHoraPartida, velocidadeCruzeiro);
 
-        List<SlotHorario> desocupados = new ArrayList<SlotHorario>();
+        List<SlotHorario> desocupados = new ArrayList<>();
 
         int horasVoo = (int) Math.ceil(horasVoo(aerovia.getExtensao(), velocidadeCruzeiro));
 
