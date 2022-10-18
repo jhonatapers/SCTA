@@ -1,0 +1,213 @@
+{
+	"info": {
+		"_postman_id": "c43ac71c-da23-446b-8447-77fd5f50d677",
+		"name": "SCTA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21746856"
+	},
+	"item": [
+		{
+			"name": "Aerovias",
+			"item": [
+				{
+					"name": "Gerar relatorio de. ocupação por data",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/aerovias/ocupacao/:nomeAerovia?data=2022-10-16",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"aerovias",
+								"ocupacao",
+								":nomeAerovia"
+							],
+							"query": [
+								{
+									"key": "data",
+									"value": "2022-10-16"
+								}
+							],
+							"variable": [
+								{
+									"key": "nomeAerovia",
+									"value": "AV3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verificar slots livres",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"aerovia\": {\n                \"nome\": \"AV3\",\n                \"extremoInicio\": {\n                    \"nome\": \"R71\",\n                    \"latitude\": 7,\n                    \"longitude\": 1\n                },\n                \"extremoFinal\": {\n                    \"nome\": \"R51\",\n                    \"latitude\": 5,\n                    \"longitude\": 1\n                },\n                \"extensao\": 1000.0,\n                \"slotsHorarios\": []\n            },\n    \"dataHoraPartida\": \"2022-10-16T14:00:00\",\n    \"velocidadeCruzeiro\": 700\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/aerovias/slots-livres",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"aerovias",
+								"slots-livres"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Rotas",
+			"item": [
+				{
+					"name": "Buscar Rotas",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/rotas/:aeroporto/:aeroporto2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rotas",
+								":aeroporto",
+								":aeroporto2"
+							],
+							"variable": [
+								{
+									"key": "aeroporto",
+									"value": "SDU"
+								},
+								{
+									"key": "aeroporto2",
+									"value": "POA"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Planos de Voo",
+			"item": [
+				{
+					"name": "Verificar plano de voo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dataHora\": \"2022-10-16T14:00:00\",\n    \"aeroportoOrigem\": {\n        \"codigoAeroporturario\":\"POA\",\n        \"nome\": \"Porto Alegre - Salgado Filho\",\n        \"coordenada\": {\n            \"nome\": \"R84\",\n            \"latitude\":8,\n            \"longitude\":4\n        }\n    },\n    \"aeroportoDestino\": {\n        \"codigoAeroporturario\":\"SDU\",\n        \"nome\": \"Santos Dummont\",\n        \"coordenada\": {\n            \"nome\": \"R71\",\n            \"latitude\":7,\n            \"longitude\":1\n        }\n    },\n    \"rota\":     {\n        \"id\": 23,\n        \"aerovias\": [\n            {\n                \"nome\": \"AV3\",\n                \"extremoInicio\": {\n                    \"nome\": \"R71\",\n                    \"latitude\": 7,\n                    \"longitude\": 1\n                },\n                \"extremoFinal\": {\n                    \"nome\": \"R51\",\n                    \"latitude\": 5,\n                    \"longitude\": 1\n                },\n                \"extensao\": 1000.0,\n                \"slotsHorarios\": []\n            },\n            {\n                \"nome\": \"AV6\",\n                \"extremoInicio\": {\n                    \"nome\": \"R73\",\n                    \"latitude\": 7,\n                    \"longitude\": 3\n                },\n                \"extremoFinal\": {\n                    \"nome\": \"R51\",\n                    \"latitude\": 5,\n                    \"longitude\": 1\n                },\n                \"extensao\": 1000.0,\n                \"slotsHorarios\": []\n            },\n            {\n                \"nome\": \"AV22\",\n                \"extremoInicio\": {\n                    \"nome\": \"R84\",\n                    \"latitude\": 8,\n                    \"longitude\": 4\n                },\n                \"extremoFinal\": {\n                    \"nome\": \"R86\",\n                    \"latitude\": 8,\n                    \"longitude\": 6\n                },\n                \"extensao\": 1000.0,\n                \"slotsHorarios\": []\n            },\n            {\n                \"nome\": \"AV23\",\n                \"extremoInicio\": {\n                    \"nome\": \"R73\",\n                    \"latitude\": 7,\n                    \"longitude\": 3\n                },\n                \"extremoFinal\": {\n                    \"nome\": \"R86\",\n                    \"latitude\": 8,\n                    \"longitude\": 6\n                },\n                \"extensao\": 1000.0,\n                \"slotsHorarios\": []\n            }\n        ]\n    },\n    \"altitude\": 26000,\n    \"velocidadeCruzeiro\": 700   \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/planos-de-voo/verificar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"planos-de-voo",
+								"verificar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar plano de voo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dataHora\": \"2022-10-16T14:00:00\",\n    \"aeroportoOrigem\": {\n        \"codigoAeroporturario\":\"POA\",\n        \"nome\": \"Porto Alegre - Salgado Filho\",\n        \"coordenada\": {\n            \"nome\": \"R84\",\n            \"latitude\":8,\n            \"longitude\":4\n        }\n    },\n    \"aeroportoDestino\": {\n        \"codigoAeroporturario\":\"SDU\",\n        \"nome\": \"Santos Dummont\",\n        \"coordenada\": {\n            \"nome\": \"R71\",\n            \"latitude\":7,\n            \"longitude\":1\n        }\n    },\n    \"rota\":     {\n        \"id\": 23,\n        \"aerovias\": [\n            {\n                \"nome\": \"AV3\",\n                \"extremoInicio\": {\n                    \"nome\": \"R71\",\n                    \"latitude\": 7,\n                    \"longitude\": 1\n                },\n                \"extremoFinal\": {\n                    \"nome\": \"R51\",\n                    \"latitude\": 5,\n                    \"longitude\": 1\n                },\n                \"extensao\": 1000.0,\n                \"slotsHorarios\": []\n            },\n            {\n                \"nome\": \"AV6\",\n                \"extremoInicio\": {\n                    \"nome\": \"R73\",\n                    \"latitude\": 7,\n                    \"longitude\": 3\n                },\n                \"extremoFinal\": {\n                    \"nome\": \"R51\",\n                    \"latitude\": 5,\n                    \"longitude\": 1\n                },\n                \"extensao\": 1000.0,\n                \"slotsHorarios\": []\n            },\n            {\n                \"nome\": \"AV22\",\n                \"extremoInicio\": {\n                    \"nome\": \"R84\",\n                    \"latitude\": 8,\n                    \"longitude\": 4\n                },\n                \"extremoFinal\": {\n                    \"nome\": \"R86\",\n                    \"latitude\": 8,\n                    \"longitude\": 6\n                },\n                \"extensao\": 1000.0,\n                \"slotsHorarios\": []\n            },\n            {\n                \"nome\": \"AV23\",\n                \"extremoInicio\": {\n                    \"nome\": \"R73\",\n                    \"latitude\": 7,\n                    \"longitude\": 3\n                },\n                \"extremoFinal\": {\n                    \"nome\": \"R86\",\n                    \"latitude\": 8,\n                    \"longitude\": 6\n                },\n                \"extensao\": 1000.0,\n                \"slotsHorarios\": []\n            }\n        ]\n    },\n    \"altitude\": 26000,\n    \"velocidadeCruzeiro\": 700   \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/planos-de-voo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"planos-de-voo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancelar plano de voo",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/planos-de-voo/:idPlanoDeVoo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"planos-de-voo",
+								":idPlanoDeVoo"
+							],
+							"variable": [
+								{
+									"key": "idPlanoDeVoo",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
