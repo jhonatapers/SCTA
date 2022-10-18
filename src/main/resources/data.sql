@@ -3,7 +3,7 @@ insert into referencia_geografica (nome, latitude, longitude) values ('R51', 5,1
 insert into referencia_geografica (nome, latitude, longitude) values ('R71', 7,1);
 
 insert into referencia_geografica (nome, latitude, longitude) values ('R22', 2,2);
-insert into referencia_geografica (nome, latitude, longitude) values ('R92', 9,2 );
+insert into referencia_geografica (nome, latitude, longitude) values ('R92', 9,2);
 insert into referencia_geografica (nome, latitude, longitude) values ('R53', 5,3);
 insert into referencia_geografica (nome, latitude, longitude) values ('R73', 7,3);
 
