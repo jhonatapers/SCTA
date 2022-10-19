@@ -86,5 +86,29 @@
         "rotaId": 34,
         "altitude": 34000,
         "velocidadeCruzeiro": 850   
+    },
+    {
+        "dataHora": "2022-10-16T01:00:00",
+        "codigoAeroportuarioOrigem":"POA",
+        "codigoAeroportuarioDestino":"CGH",
+        "rotaId": 57,
+        "altitude": 34000,
+        "velocidadeCruzeiro": 850   
+    },
+    {
+        "dataHora": "2022-10-16T05:00:00",
+        "codigoAeroportuarioOrigem":"POA",
+        "codigoAeroportuarioDestino":"CGH",
+        "rotaId": 58,
+        "altitude": 34000,
+        "velocidadeCruzeiro": 850   
+    },
+    {
+        "dataHora": "2022-10-16T012:00:00",
+        "codigoAeroportuarioOrigem":"POA",
+        "codigoAeroportuarioDestino":"CGH",
+        "rotaId": 58,
+        "altitude": 34000,
+        "velocidadeCruzeiro": 850   
     }
 ]
