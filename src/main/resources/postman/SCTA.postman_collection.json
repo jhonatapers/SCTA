@@ -1,15 +1,16 @@
 {
 	"info": {
-		"_postman_id": "69143365-7620-4930-9517-d17acc2cf8cf",
+		"_postman_id": "1b430a7a-876c-4a1b-a081-56c2ee97363a",
 		"name": "SCTA",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16742822"
 	},
 	"item": [
 		{
 			"name": "Aerovias",
 			"item": [
 				{
-					"name": "Gerar relatorio de. ocupação por data",
+					"name": "Gerar relatorio de ocupação por data",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -139,7 +140,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/planos-de-voo/verificar"
+						"url": {
+							"raw": "http://localhost:8080/planos-de-voo/verificar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"planos-de-voo",
+								"verificar"
+							]
+						}
 					},
 					"response": []
 				},
@@ -157,7 +169,17 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/planos-de-voo"
+						"url": {
+							"raw": "http://localhost:8080/planos-de-voo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"planos-de-voo"
+							]
+						}
 					},
 					"response": []
 				},
@@ -182,6 +204,59 @@
 									"key": "idPlanoDeVoo",
 									"value": "0"
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Popular banco",
+			"item": [
+				{
+					"name": "Populador de banco",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dataHora\": \"{{dataHora}}\",\r\n    \"codigoAeroporturarioOrigem\":\"{{codigoAeroporturarioOrigem}}\",\r\n    \"codigoAeroporturarioDestino\":\"{{codigoAeroporturarioDestino}}\",\r\n    \"rotaId\": {{rotaId}},\r\n    \"altitude\": {{altitude}},\r\n    \"velocidadeCruzeiro\": {{velocidadeCruzeiro}}   \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/planos-de-voo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"planos-de-voo"
 							]
 						}
 					},
