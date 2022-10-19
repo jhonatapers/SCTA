@@ -1,9 +1,8 @@
 {
 	"info": {
-		"_postman_id": "c43ac71c-da23-446b-8447-77fd5f50d677",
+		"_postman_id": "69143365-7620-4930-9517-d17acc2cf8cf",
 		"name": "SCTA",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "21746856"
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
 		{
@@ -45,19 +44,10 @@
 				{
 					"name": "Verificar slots livres",
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"aerovia\": {\n                \"nome\": \"AV3\",\n                \"extremoInicio\": {\n                    \"nome\": \"R71\",\n                    \"latitude\": 7,\n                    \"longitude\": 1\n                },\n                \"extremoFinal\": {\n                    \"nome\": \"R51\",\n                    \"latitude\": 5,\n                    \"longitude\": 1\n                },\n                \"extensao\": 1000.0,\n                \"slotsHorarios\": []\n            },\n    \"dataHoraPartida\": \"2022-10-16T14:00:00\",\n    \"velocidadeCruzeiro\": 700\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "http://localhost:8080/aerovias/slots-livres",
+							"raw": "http://localhost:8080/aerovias/slots-livres/AV3?dataHoraPartida=2022-10-16T14:00:00&velocidadeCruzeiro=700",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -65,7 +55,18 @@
 							"port": "8080",
 							"path": [
 								"aerovias",
-								"slots-livres"
+								"slots-livres",
+								"AV3"
+							],
+							"query": [
+								{
+									"key": "dataHoraPartida",
+									"value": "2022-10-16T14:00:00"
+								},
+								{
+									"key": "velocidadeCruzeiro",
+									"value": "700"
+								}
 							]
 						}
 					},
@@ -131,25 +132,14 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"dataHora\": \"2022-10-16T14:00:00\",\n    \"aeroportoOrigem\": {\n        \"codigoAeroporturario\":\"POA\",\n        \"nome\": \"Porto Alegre - Salgado Filho\",\n        \"coordenada\": {\n            \"nome\": \"R84\",\n            \"latitude\":8,\n            \"longitude\":4\n        }\n    },\n    \"aeroportoDestino\": {\n        \"codigoAeroporturario\":\"SDU\",\n        \"nome\": \"Santos Dummont\",\n        \"coordenada\": {\n            \"nome\": \"R71\",\n            \"latitude\":7,\n            \"longitude\":1\n        }\n    },\n    \"rota\":     {\n        \"id\": 23,\n        \"aerovias\": [\n            {\n                \"nome\": \"AV3\",\n                \"extremoInicio\": {\n                    \"nome\": \"R71\",\n                    \"latitude\": 7,\n                    \"longitude\": 1\n                },\n                \"extremoFinal\": {\n                    \"nome\": \"R51\",\n                    \"latitude\": 5,\n                    \"longitude\": 1\n                },\n                \"extensao\": 1000.0,\n                \"slotsHorarios\": []\n            },\n            {\n                \"nome\": \"AV6\",\n                \"extremoInicio\": {\n                    \"nome\": \"R73\",\n                    \"latitude\": 7,\n                    \"longitude\": 3\n                },\n                \"extremoFinal\": {\n                    \"nome\": \"R51\",\n                    \"latitude\": 5,\n                    \"longitude\": 1\n                },\n                \"extensao\": 1000.0,\n                \"slotsHorarios\": []\n            },\n            {\n                \"nome\": \"AV22\",\n                \"extremoInicio\": {\n                    \"nome\": \"R84\",\n                    \"latitude\": 8,\n                    \"longitude\": 4\n                },\n                \"extremoFinal\": {\n                    \"nome\": \"R86\",\n                    \"latitude\": 8,\n                    \"longitude\": 6\n                },\n                \"extensao\": 1000.0,\n                \"slotsHorarios\": []\n            },\n            {\n                \"nome\": \"AV23\",\n                \"extremoInicio\": {\n                    \"nome\": \"R73\",\n                    \"latitude\": 7,\n                    \"longitude\": 3\n                },\n                \"extremoFinal\": {\n                    \"nome\": \"R86\",\n                    \"latitude\": 8,\n                    \"longitude\": 6\n                },\n                \"extensao\": 1000.0,\n                \"slotsHorarios\": []\n            }\n        ]\n    },\n    \"altitude\": 26000,\n    \"velocidadeCruzeiro\": 700   \n}",
+							"raw": "{\n    \"dataHora\": \"2022-10-16T14:00:00\",\n    \"codigoAeroporturarioOrigem\":\"POA\",\n    \"codigoAeroporturarioDestino\":\"SDU\",\n    \"rotaId\": 23,\n    \"altitude\": 26000,\n    \"velocidadeCruzeiro\": 700   \n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:8080/planos-de-voo/verificar",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"planos-de-voo",
-								"verificar"
-							]
-						}
+						"url": "http://localhost:8080/planos-de-voo/verificar"
 					},
 					"response": []
 				},
@@ -160,24 +150,14 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"dataHora\": \"2022-10-16T14:00:00\",\n    \"aeroportoOrigem\": {\n        \"codigoAeroporturario\":\"POA\",\n        \"nome\": \"Porto Alegre - Salgado Filho\",\n        \"coordenada\": {\n            \"nome\": \"R84\",\n            \"latitude\":8,\n            \"longitude\":4\n        }\n    },\n    \"aeroportoDestino\": {\n        \"codigoAeroporturario\":\"SDU\",\n        \"nome\": \"Santos Dummont\",\n        \"coordenada\": {\n            \"nome\": \"R71\",\n            \"latitude\":7,\n            \"longitude\":1\n        }\n    },\n    \"rota\":     {\n        \"id\": 23,\n        \"aerovias\": [\n            {\n                \"nome\": \"AV3\",\n                \"extremoInicio\": {\n                    \"nome\": \"R71\",\n                    \"latitude\": 7,\n                    \"longitude\": 1\n                },\n                \"extremoFinal\": {\n                    \"nome\": \"R51\",\n                    \"latitude\": 5,\n                    \"longitude\": 1\n                },\n                \"extensao\": 1000.0,\n                \"slotsHorarios\": []\n            },\n            {\n                \"nome\": \"AV6\",\n                \"extremoInicio\": {\n                    \"nome\": \"R73\",\n                    \"latitude\": 7,\n                    \"longitude\": 3\n                },\n                \"extremoFinal\": {\n                    \"nome\": \"R51\",\n                    \"latitude\": 5,\n                    \"longitude\": 1\n                },\n                \"extensao\": 1000.0,\n                \"slotsHorarios\": []\n            },\n            {\n                \"nome\": \"AV22\",\n                \"extremoInicio\": {\n                    \"nome\": \"R84\",\n                    \"latitude\": 8,\n                    \"longitude\": 4\n                },\n                \"extremoFinal\": {\n                    \"nome\": \"R86\",\n                    \"latitude\": 8,\n                    \"longitude\": 6\n                },\n                \"extensao\": 1000.0,\n                \"slotsHorarios\": []\n            },\n            {\n                \"nome\": \"AV23\",\n                \"extremoInicio\": {\n                    \"nome\": \"R73\",\n                    \"latitude\": 7,\n                    \"longitude\": 3\n                },\n                \"extremoFinal\": {\n                    \"nome\": \"R86\",\n                    \"latitude\": 8,\n                    \"longitude\": 6\n                },\n                \"extensao\": 1000.0,\n                \"slotsHorarios\": []\n            }\n        ]\n    },\n    \"altitude\": 26000,\n    \"velocidadeCruzeiro\": 700   \n}",
+							"raw": "{\n    \"dataHora\": \"2022-10-16T14:00:00\",\n    \"codigoAeroporturarioOrigem\":\"POA\",\n    \"codigoAeroporturarioDestino\":\"SDU\",\n    \"rotaId\": 23,\n    \"altitude\": 26000,\n    \"velocidadeCruzeiro\": 700   \n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:8080/planos-de-voo",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"planos-de-voo"
-							]
-						}
+						"url": "http://localhost:8080/planos-de-voo"
 					},
 					"response": []
 				},
