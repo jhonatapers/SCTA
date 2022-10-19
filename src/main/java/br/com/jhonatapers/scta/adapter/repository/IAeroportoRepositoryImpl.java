@@ -17,7 +17,7 @@ public class IAeroportoRepositoryImpl implements IAeroportoRepository {
     }
 
     @Override
-    public Optional<Aeroporto> findByCodigoAeroporturario(String codigoAeroporturario) {
-        return aeroportoCRUD.findById(codigoAeroporturario);
+    public Optional<Aeroporto> findByCodigoAeroportuario(String codigoAeroportuario) {
+        return aeroportoCRUD.findById(codigoAeroportuario);
     }
 }

@@ -27,6 +27,10 @@ public class ValidacaoPlanoDeVooDto {
         return isValid;
     }
 
+    public void setIsValid(boolean isValid){
+        this.isValid = isValid;
+    }
+
     public List<String> getProblemas() {
         return problemas;
     }

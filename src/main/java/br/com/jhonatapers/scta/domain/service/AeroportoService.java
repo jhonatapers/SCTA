@@ -14,6 +14,6 @@ public class AeroportoService {
     }
 
     public Optional<Aeroporto> buscar(String codigoAeroportuario) {
-        return aeroportoRepository.findByCodigoAeroporturario(codigoAeroportuario);
+        return aeroportoRepository.findByCodigoAeroportuario(codigoAeroportuario);
     }
 }

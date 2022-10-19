@@ -37,6 +37,12 @@ public class PlanoDeVooService {
             throw new RuntimeException("Rota inexistente");
         });
 
+        Aeroporto origem = aeroportoService.buscar(planoDeVooDto.getCodigoAeroportuarioOrigem())
+                .orElseThrow(() -> new RuntimeException("Aeroporto origem não encontrado"));
+
+        Aeroporto destino = aeroportoService.buscar(planoDeVooDto.getCodigoAeroportuarioDestino())
+                .orElseThrow(() -> new RuntimeException("Aeroporto destino não encontrado"));
+
         rotasService.ocupaRota(
                 rota,
                 planoDeVooDto.getDataHora(),
@@ -44,7 +50,7 @@ public class PlanoDeVooService {
                 planoDeVooDto.getVelocidadeCruzeiro());
 
         return repository.save(new PlanoDeVoo(planoDeVooDto.getDataHora(), rota, planoDeVooDto.getAltitude(),
-                planoDeVooDto.getVelocidadeCruzeiro()));
+                planoDeVooDto.getVelocidadeCruzeiro(), origem, destino));
     }
 
     public void cancelar(Long idPlanoDeVoo) {
@@ -73,6 +79,7 @@ public class PlanoDeVooService {
     public ValidacaoPlanoDeVooDto verificar(PlanoDeVooDto planoDeVooDto) {
 
         ValidacaoPlanoDeVooDto validacaoPlanoDeVooDto = new ValidacaoPlanoDeVooDto();
+        validacaoPlanoDeVooDto.setIsValid(true);
 
         if (planoDeVooDto.getAltitude() > 35000 || planoDeVooDto.getAltitude() < 25000)
             validacaoPlanoDeVooDto.addProblema("Altitude invalida");
@@ -85,7 +92,7 @@ public class PlanoDeVooService {
                 throw new RuntimeException("Rota inexistente");
             });
 
-            Aeroporto origem = aeroportoService.buscar(planoDeVooDto.getCodigoAeroporturarioOrigem())
+            Aeroporto origem = aeroportoService.buscar(planoDeVooDto.getCodigoAeroportuarioOrigem())
                     .orElseThrow(() -> new RuntimeException("Aeroporto origem não encontrado"));
 
             for (String problema : aeroviaService.validacao(rota.getAerovias(),

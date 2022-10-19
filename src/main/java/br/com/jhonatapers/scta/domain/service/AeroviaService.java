@@ -53,7 +53,7 @@ public class AeroviaService {
 
                     aerovia = repository.findByNome(aerovia.getNome()).get();
 
-                    if (!slotsOcupados(aerovia, dataHoraPartida, velocidadeCruzeiro).isEmpty())
+                    if (!slotsOcupados(aerovia, dataHoraPartida, velocidadeCruzeiro).stream().filter(slotHorario -> slotHorario.getAltitude() == altitude).toList().isEmpty())
                         problemas.add("Aerovia " + aerovia.getNome() + " ocupada.");
 
                     if (aerovia.getExtremoFinal().equals(partida)) {

@@ -9,7 +9,7 @@ import javax.persistence.OneToOne;
 public class Aeroporto {
 
     @Id
-    private String codigoAeroporturario;
+    private String codigoAeroportuario;
 
     private String nome;
 
@@ -20,14 +20,14 @@ public class Aeroporto {
     public Aeroporto() {
     }
 
-    public Aeroporto(String codigoAeroporturario, String nome, ReferenciaGeografica coordenada) {
-        this.codigoAeroporturario = codigoAeroporturario;
+    public Aeroporto(String codigoAeroportuario, String nome, ReferenciaGeografica coordenada) {
+        this.codigoAeroportuario = codigoAeroportuario;
         this.nome = nome;
         this.coordenada = coordenada;
     }
 
-    public String getCodigoAeroporturario() {
-        return codigoAeroporturario;
+    public String getCodigoAeroportuario() {
+        return codigoAeroportuario;
     }
 
     public String getNome() {

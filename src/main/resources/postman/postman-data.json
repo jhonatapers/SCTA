@@ -1,88 +1,88 @@
 [
     {
         "dataHora": "2022-10-16T14:00:00",
-        "codigoAeroporturarioOrigem":"POA",
-        "codigoAeroporturarioDestino":"SDU",
+        "codigoAeroportuarioOrigem":"POA",
+        "codigoAeroportuarioDestino":"SDU",
         "rotaId": 23,
         "altitude": 26000,
         "velocidadeCruzeiro": 700   
     },
     {
         "dataHora": "2022-10-16T11:00:00",
-        "codigoAeroporturarioOrigem":"POA",
-        "codigoAeroporturarioDestino":"CGH",
+        "codigoAeroportuarioOrigem":"POA",
+        "codigoAeroportuarioDestino":"CGH",
         "rotaId": 59,
         "altitude": 27000,
         "velocidadeCruzeiro": 750   
     },
     {
         "dataHora": "2022-10-16T14:00:00",
-        "codigoAeroporturarioOrigem":"POA",
-        "codigoAeroporturarioDestino":"CGH",
+        "codigoAeroportuarioOrigem":"POA",
+        "codigoAeroportuarioDestino":"CGH",
         "rotaId": 61,
         "altitude": 31000,
         "velocidadeCruzeiro": 790   
     },
     {
-        "dataHora": "2022-10-16T12:00:00",
-        "codigoAeroporturarioOrigem":"POA",
-        "codigoAeroporturarioDestino":"RBR",
+        "dataHora": "2022-10-16T21:00:00",
+        "codigoAeroportuarioOrigem":"POA",
+        "codigoAeroportuarioDestino":"RBR",
         "rotaId": 62,
         "altitude": 33000,
         "velocidadeCruzeiro": 900   
     },
     {
-        "dataHora": "2022-10-16T11:00:00",
-        "codigoAeroporturarioOrigem":"POA",
-        "codigoAeroporturarioDestino":"RBR",
+        "dataHora": "2022-10-18T11:00:00",
+        "codigoAeroportuarioOrigem":"POA",
+        "codigoAeroportuarioDestino":"RBR",
         "rotaId": 63,
         "altitude": 26000,
         "velocidadeCruzeiro": 690   
     },
     {
-        "dataHora": "2022-10-16T17:00:00",
-        "codigoAeroporturarioOrigem":"SDU",
-        "codigoAeroporturarioDestino":"POA",
+        "dataHora": "2022-10-16T20:00:00",
+        "codigoAeroportuarioOrigem":"SDU",
+        "codigoAeroportuarioDestino":"POA",
         "rotaId": 18,
         "altitude": 29000,
         "velocidadeCruzeiro": 715   
     },
     {
-        "dataHora": "2022-10-16T14:00:00",
-        "codigoAeroporturarioOrigem":"POA",
-        "codigoAeroporturarioDestino":"SDU",
+        "dataHora": "2022-10-17T14:00:00",
+        "codigoAeroportuarioOrigem":"POA",
+        "codigoAeroportuarioDestino":"SDU",
         "rotaId": 23,
         "altitude": 26000,
         "velocidadeCruzeiro": 700   
     },
     {
         "dataHora": "2022-10-16T09:00:00",
-        "codigoAeroporturarioOrigem":"CGB",
-        "codigoAeroporturarioDestino":"POA",
+        "codigoAeroportuarioOrigem":"CGB",
+        "codigoAeroportuarioDestino":"POA",
         "rotaId": 52,
         "altitude": 28000,
         "velocidadeCruzeiro": 700   
     },
     {
         "dataHora": "2022-10-16T07:00:00",
-        "codigoAeroporturarioOrigem":"CGB",
-        "codigoAeroporturarioDestino":"POA",
+        "codigoAeroportuarioOrigem":"CGB",
+        "codigoAeroportuarioDestino":"POA",
         "rotaId": 55,
         "altitude": 30000,
         "velocidadeCruzeiro": 740   
     },
     {
         "dataHora": "2022-10-16T21:00:00",
-        "codigoAeroporturarioOrigem":"POA",
-        "codigoAeroporturarioDestino":"GRU",
+        "codigoAeroportuarioOrigem":"POA",
+        "codigoAeroportuarioDestino":"GRU",
         "rotaId": 32,
-        "altitude": 39000,
+        "altitude": 31000,
         "velocidadeCruzeiro": 800   
     },
     {
         "dataHora": "2022-10-16T18:00:00",
-        "codigoAeroporturarioOrigem":"GRU",
-        "codigoAeroporturarioDestino":"POA",
+        "codigoAeroportuarioOrigem":"GRU",
+        "codigoAeroportuarioDestino":"POA",
         "rotaId": 34,
         "altitude": 34000,
         "velocidadeCruzeiro": 850   

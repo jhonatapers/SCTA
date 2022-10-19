@@ -35,11 +35,13 @@ public class PlanoDeVoo {
     public PlanoDeVoo() {
     }
 
-    public PlanoDeVoo(LocalDateTime data, Rota rota, float altitude, float velocidadeCruzeiro) {
+    public PlanoDeVoo(LocalDateTime data, Rota rota, float altitude, float velocidadeCruzeiro, Aeroporto aeroportoOrigem, Aeroporto aeroportoDestino) {
         this.dataHora = data;
         this.rota = rota;
         this.altitude = altitude;
         this.velocidadeCruzeiro = velocidadeCruzeiro;
+        this.aeroportoOrigem = aeroportoOrigem;
+        this.aeroportoDestino = aeroportoDestino;
     }
 
     public long getId() {
