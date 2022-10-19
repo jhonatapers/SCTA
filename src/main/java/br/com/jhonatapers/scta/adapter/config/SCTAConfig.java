@@ -39,7 +39,7 @@ public class SCTAConfig {
     @Bean
     public PlanoDeVooService planoDeVooService(IPlanoDeVooRepository planoDeVooRepository,
                                                RotasService rotasService,
-                                               AeroviaService aeroviaService) {
-        return new PlanoDeVooService(planoDeVooRepository, rotasService, aeroviaService);
+                                               AeroviaService aeroviaService, AeroportoService aeroportoService) {
+        return new PlanoDeVooService(planoDeVooRepository, rotasService, aeroviaService, aeroportoService);
     }
 }

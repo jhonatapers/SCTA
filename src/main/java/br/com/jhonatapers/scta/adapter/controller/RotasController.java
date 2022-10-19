@@ -1,7 +1,7 @@
-package br.com.jhonatapers.scta.application.controller;
+package br.com.jhonatapers.scta.adapter.controller;
 
+import br.com.jhonatapers.scta.application.usecases.ConsultaRotasEntreAeroportosUC;
 import br.com.jhonatapers.scta.domain.entity.Rota;
-import br.com.jhonatapers.scta.domain.service.RotasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,18 +13,18 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/rotas")
+@CrossOrigin(origins = "*")
 public class RotasController {
 
-    private final RotasService service;
+    private final ConsultaRotasEntreAeroportosUC consultaRotasEntreAeroportosUC;
 
     @Autowired
-    public RotasController(RotasService service) {
-        this.service = service;
+    public RotasController(ConsultaRotasEntreAeroportosUC consultaRotasEntreAeroportosUC) {
+        this.consultaRotasEntreAeroportosUC = consultaRotasEntreAeroportosUC;
     }
 
     @GetMapping("/{codigoAeroportuario}/{codigoAeroportuario2}")
-    @CrossOrigin(origins = "*")
     public List<Rota> consultar(@PathVariable String codigoAeroportuario, @PathVariable String codigoAeroportuario2) {
-        return service.consultarEntreAeroportos(codigoAeroportuario, codigoAeroportuario2);
+        return consultaRotasEntreAeroportosUC.run(codigoAeroportuario, codigoAeroportuario2);
     }
 }

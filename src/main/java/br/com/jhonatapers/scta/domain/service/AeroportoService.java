@@ -1,5 +1,7 @@
 package br.com.jhonatapers.scta.domain.service;
 
+import java.util.Optional;
+
 import br.com.jhonatapers.scta.domain.entity.Aeroporto;
 import br.com.jhonatapers.scta.domain.repository.IAeroportoRepository;
 
@@ -11,8 +13,7 @@ public class AeroportoService {
         this.aeroportoRepository = aeroportoRepository;
     }
 
-    public Aeroporto buscar(String codigoAeroportuario) {
-        return aeroportoRepository.findByCodigoAeroporturario(codigoAeroportuario)
-                .orElseThrow(() -> new RuntimeException("Aeroporto não encontrado"));
+    public Optional<Aeroporto> buscar(String codigoAeroportuario) {
+        return aeroportoRepository.findByCodigoAeroporturario(codigoAeroportuario);
     }
 }

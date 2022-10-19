@@ -1,6 +1,7 @@
 package br.com.jhonatapers.scta.adapter.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import br.com.jhonatapers.scta.adapter.jpa.IRotaCRUD;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +22,9 @@ public class RotaRepositoryImpl implements IRotaRepository {
 
     public List<Rota> findAll() {
         return rotaCRUD.findAll();
+    }
+
+    public Optional<Rota> findById(long rotaId) {
+        return rotaCRUD.findById(rotaId);
     }
 }

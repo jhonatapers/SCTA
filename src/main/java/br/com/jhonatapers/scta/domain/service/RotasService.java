@@ -2,6 +2,7 @@ package br.com.jhonatapers.scta.domain.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import br.com.jhonatapers.scta.domain.entity.Aeroporto;
 import br.com.jhonatapers.scta.domain.entity.ReferenciaGeografica;
@@ -10,59 +11,69 @@ import br.com.jhonatapers.scta.domain.repository.IRotaRepository;
 
 public class RotasService {
 
-    AeroviaService aeroviaService;
+        AeroviaService aeroviaService;
 
-    IRotaRepository repository;
+        IRotaRepository repository;
 
-    private AeroportoService aeroportoService;
+        private AeroportoService aeroportoService;
 
-
-    public RotasService(AeroviaService aeroviaService,
+        public RotasService(AeroviaService aeroviaService,
                         IRotaRepository repository,
                         AeroportoService aeroportoService) {
-        this.aeroviaService = aeroviaService;
-        this.repository = repository;
-        this.aeroportoService = aeroportoService;
-    }
+                this.aeroviaService = aeroviaService;
+                this.repository = repository;
+                this.aeroportoService = aeroportoService;
+        }
 
-    public List<Rota> consultarEntreAeroportos(String codigoAeroportuarioOrigem, String codigoAeroportuarioDestino) {
+        public Optional<Rota> getRota(long idRota) {
+                return repository.findById(idRota);
+        }
 
-        final Aeroporto aeroportoOrigem = aeroportoService.buscar(codigoAeroportuarioOrigem);
-        final Aeroporto aeroportoDestino = aeroportoService.buscar(codigoAeroportuarioDestino);
+        public List<Rota> consultarEntreAeroportos(String codigoAeroportuarioOrigem,
+                        String codigoAeroportuarioDestino) {
 
-        List<Rota> rotas = repository.findAll();
+                final Aeroporto aeroportoOrigem = aeroportoService.buscar(codigoAeroportuarioOrigem).orElseThrow(() -> {
+                        throw new RuntimeException("Aeroporto não encontrado");
+                });
 
-        final ReferenciaGeografica refOrigem = aeroportoOrigem.getCoordenada();
-        final ReferenciaGeografica refDestino = aeroportoDestino.getCoordenada();
+                final Aeroporto aeroportoDestino = aeroportoService.buscar(codigoAeroportuarioDestino).orElseThrow(() -> {
+                        throw new RuntimeException("Aeroporto não encontrado");
+                });
 
-        List<Rota> rotasNaOrigem = rotas
-                .stream()
-                .filter(rota -> rota.getAerovias()
-                        .stream()
-                        .filter(aerovia -> aerovia.getExtremoFinal().equals(refOrigem)
-                                || aerovia.getExtremoInicio().equals(refOrigem))
-                        .findFirst()
-                        .isPresent())
-                .toList();
+                List<Rota> rotas = repository.findAll();
 
-        List<Rota> interseccaoRotas = rotasNaOrigem
-                .stream()
-                .filter(rota -> rota.getAerovias()
-                        .stream()
-                        .filter(aerovia -> aerovia.getExtremoFinal().equals(refDestino)
-                                || aerovia.getExtremoInicio().equals(refDestino))
-                        .findFirst()
-                        .isPresent()).toList();
+                final ReferenciaGeografica refOrigem = aeroportoOrigem.getCoordenada();
+                final ReferenciaGeografica refDestino = aeroportoDestino.getCoordenada();
 
-        return interseccaoRotas;
-    }
+                List<Rota> rotasNaOrigem = rotas
+                                .stream()
+                                .filter(rota -> rota.getAerovias()
+                                                .stream()
+                                                .filter(aerovia -> aerovia.getExtremoFinal().equals(refOrigem)
+                                                                || aerovia.getExtremoInicio().equals(refOrigem))
+                                                .findFirst()
+                                                .isPresent())
+                                .toList();
 
-    public void ocupaRota(Rota rota, LocalDateTime dataHora, float altitude, float velocidadeCruzeiro) {
-        aeroviaService.ocupaSlotHorario(rota.getAerovias(), dataHora, altitude, velocidadeCruzeiro);
-    }
+                List<Rota> interseccaoRotas = rotasNaOrigem
+                                .stream()
+                                .filter(rota -> rota.getAerovias()
+                                                .stream()
+                                                .filter(aerovia -> aerovia.getExtremoFinal().equals(refDestino)
+                                                                || aerovia.getExtremoInicio().equals(refDestino))
+                                                .findFirst()
+                                                .isPresent())
+                                .toList();
 
-    public void desocupaRota(Rota rota, LocalDateTime dataHora, float altitude, float velocidadeCruzeiro) {
-        aeroviaService.desocupaSlotHorario(rota.getAerovias(), dataHora, altitude, velocidadeCruzeiro);
-    }
+                return interseccaoRotas;
+        }
+
+        public void ocupaRota(Rota rota, LocalDateTime dataHora, float altitude, float velocidadeCruzeiro) {
+                aeroviaService.ocupaSlotHorario(rota.getAerovias(), dataHora, altitude, velocidadeCruzeiro);
+        }
+
+        public void desocupaRota(Rota rota, LocalDateTime dataHora, float altitude, float velocidadeCruzeiro) {
+                aeroviaService.desocupaSlotHorario(rota.getAerovias(), dataHora, altitude, velocidadeCruzeiro);
+        }
 
 }

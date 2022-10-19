@@ -1,10 +1,12 @@
 package br.com.jhonatapers.scta.domain.service;
 
 import java.util.List;
-import java.util.Optional;
 
+import br.com.jhonatapers.scta.domain.dto.PlanoDeVooDto;
 import br.com.jhonatapers.scta.domain.dto.ValidacaoPlanoDeVooDto;
+import br.com.jhonatapers.scta.domain.entity.Aeroporto;
 import br.com.jhonatapers.scta.domain.entity.PlanoDeVoo;
+import br.com.jhonatapers.scta.domain.entity.Rota;
 import br.com.jhonatapers.scta.domain.repository.IPlanoDeVooRepository;
 
 public class PlanoDeVooService {
@@ -15,29 +17,34 @@ public class PlanoDeVooService {
 
     private final AeroviaService aeroviaService;
 
-    public PlanoDeVooService(IPlanoDeVooRepository repository, RotasService rotasService, AeroviaService aeroviaService) {
+    private final AeroportoService aeroportoService;
+
+    public PlanoDeVooService(IPlanoDeVooRepository repository, RotasService rotasService,
+            AeroviaService aeroviaService, AeroportoService aeroportoService) {
         this.repository = repository;
         this.rotasService = rotasService;
         this.aeroviaService = aeroviaService;
+        this.aeroportoService = aeroportoService;
     }
 
-    public PlanoDeVoo cadastrar(PlanoDeVoo planoDeVoo) {
-        if (!verificar(planoDeVoo).isValid()) {
+    public PlanoDeVoo cadastrar(PlanoDeVooDto planoDeVooDto) {
+
+        if (!verificar(planoDeVooDto).isValid()) {
             throw new RuntimeException("Plano de Voo inválido");
         }
-        Optional<PlanoDeVoo> _planoDeVoo = repository.findById(planoDeVoo.getId());
 
-        if (_planoDeVoo.isPresent()) {
-            planoDeVoo = _planoDeVoo.get();
-            planoDeVoo.setCancelado(false);
-        }
+        Rota rota = rotasService.getRota(planoDeVooDto.getRotaId()).orElseThrow(() -> {
+            throw new RuntimeException("Rota inexistente");
+        });
+
         rotasService.ocupaRota(
-                planoDeVoo.getRota(),
-                planoDeVoo.getDataHora(),
-                planoDeVoo.getAltitude(),
-                planoDeVoo.getVelocidadeCruzeiro());
+                rota,
+                planoDeVooDto.getDataHora(),
+                planoDeVooDto.getAltitude(),
+                planoDeVooDto.getVelocidadeCruzeiro());
 
-        return repository.save(planoDeVoo);
+        return repository.save(new PlanoDeVoo(planoDeVooDto.getDataHora(), rota, planoDeVooDto.getAltitude(),
+                planoDeVooDto.getVelocidadeCruzeiro()));
     }
 
     public void cancelar(Long idPlanoDeVoo) {
@@ -63,20 +70,27 @@ public class PlanoDeVooService {
         return repository.findAll();
     }
 
-    public ValidacaoPlanoDeVooDto verificar(PlanoDeVoo planoDeVoo) {
+    public ValidacaoPlanoDeVooDto verificar(PlanoDeVooDto planoDeVooDto) {
 
         ValidacaoPlanoDeVooDto validacaoPlanoDeVooDto = new ValidacaoPlanoDeVooDto();
 
-        if (planoDeVoo.getAltitude() > 35000 || planoDeVoo.getAltitude() < 25000)
+        if (planoDeVooDto.getAltitude() > 35000 || planoDeVooDto.getAltitude() < 25000)
             validacaoPlanoDeVooDto.addProblema("Altitude invalida");
 
-        if (planoDeVoo.getVelocidadeCruzeiro() < 1) {
+        if (planoDeVooDto.getVelocidadeCruzeiro() < 1) {
             validacaoPlanoDeVooDto.addProblema("Velocidade de cruzeiro invalida");
         } else {
 
-            for (String problema : aeroviaService.validacao(planoDeVoo.getRota().getAerovias(),
-                    planoDeVoo.getAeroportoOrigem().getCoordenada(), planoDeVoo.getDataHora(),
-                    planoDeVoo.getAltitude(), planoDeVoo.getVelocidadeCruzeiro())) {
+            Rota rota = rotasService.getRota(planoDeVooDto.getRotaId()).orElseThrow(() -> {
+                throw new RuntimeException("Rota inexistente");
+            });
+
+            Aeroporto origem = aeroportoService.buscar(planoDeVooDto.getCodigoAeroporturarioOrigem())
+                    .orElseThrow(() -> new RuntimeException("Aeroporto origem não encontrado"));
+
+            for (String problema : aeroviaService.validacao(rota.getAerovias(),
+                    origem.getCoordenada(), planoDeVooDto.getDataHora(),
+                    planoDeVooDto.getAltitude(), planoDeVooDto.getVelocidadeCruzeiro())) {
                 validacaoPlanoDeVooDto.addProblema(problema);
             }
         }

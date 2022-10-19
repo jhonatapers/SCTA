@@ -86,7 +86,11 @@ public class AeroviaService {
                 .toList();
     }
 
-    public List<SlotHorario> slotsLivres(Aerovia aerovia, LocalDateTime dataHoraPartida, float velocidadeCruzeiro) {
+    public List<SlotHorario> slotsLivres(String aeroviaId, LocalDateTime dataHoraPartida, float velocidadeCruzeiro) {
+
+        Aerovia aerovia = this.repository.findByNome(aeroviaId).orElseThrow(() -> {
+            throw new RuntimeException("Aerovia nao encontrada");
+        });
 
         List<SlotHorario> ocupados = slotsOcupados(buscar(aerovia.getNome()), dataHoraPartida, velocidadeCruzeiro);
 
