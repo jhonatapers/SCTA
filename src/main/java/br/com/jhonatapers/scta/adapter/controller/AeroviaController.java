@@ -4,9 +4,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import br.com.jhonatapers.scta.application.dto.RelatorioDTO;
 import br.com.jhonatapers.scta.application.usecases.ConsultaSlotsLivreUC;
 import br.com.jhonatapers.scta.application.usecases.GeraRelatorioOcupacaoUC;
-import br.com.jhonatapers.scta.domain.dto.RelatorioDTO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.CrossOrigin;
