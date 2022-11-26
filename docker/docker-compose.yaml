@@ -1,0 +1,104 @@
+version: '3.7' 
+
+services:
+  name-server:
+    image: projarc/name-server
+    ports:
+      - "8761:8761"
+    networks:
+      - flight-network
+
+  zipkin-server:
+    image: openzipkin/zipkin:2.23
+    mem_limit: 300m
+    ports:
+      - "9411:9411"
+    environment:
+      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+    networks:
+      - flight-network
+    depends_on:
+      - rabbitmq
+    restart: always
+
+  api-gateway:
+    image: projarc/api-gateway
+    ports:
+      - "8765:8765"
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://name-server:8761/eureka
+      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+    networks:
+      - flight-network
+    depends_on:
+      - name-server
+
+  scta:
+    image: projarc/scta
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: jdbc:postgresql://scta-database:5432/postgres
+      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_ZIPKIN_SENDER_TYPE: rabbit
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://name-server:8761/eureka
+      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+      FLIGHT-PLAN.HOST: http://flight-plan:8080
+    networks:
+      - flight-network
+    depends_on:
+      - name-server
+      - api-gateway
+      - scta-database
+      - rabbitmq
+
+  flight-plan:
+    image: projarc/flight-plan
+    ports:
+      - "8081:8080"
+    environment:
+      DB_URL: jdbc:postgresql://flight-plan-database:5432/postgres
+      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_ZIPKIN_SENDER_TYPE: rabbit
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://name-server:8761/eureka
+      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+    networks:
+      - flight-network
+    depends_on:
+      - name-server
+      - api-gateway
+      - flight-plan-database
+      - rabbitmq
+
+  scta-database:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: "postgres"
+    networks:
+      - flight-network
+
+  flight-plan-database:
+    image: postgres
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_PASSWORD: "postgres"
+    networks:
+      - flight-network
+
+  rabbitmq: 
+    image: rabbitmq:3.8.12-management 
+    mem_limit: 300m 
+    ports: 
+      - "5672:5672" 
+      - "15672:15672" 
+    restart: always
+    networks:
+      - flight-network
+
+networks:
+  flight-network: 
