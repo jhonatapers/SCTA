@@ -1,0 +1,8 @@
+spring:
+  zipkin:
+    base-url: ${SPRING.ZIPKIN.BASEURL}
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA.CLIENT.SERVICEURL.DEFAULTZONE}
