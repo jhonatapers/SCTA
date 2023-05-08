@@ -21,5 +21,5 @@ public class AeronavesRepositoryImpl implements IAeronavesRepository {
     public Optional<Aeronave> findByPrefixo(String prefixo) {
         return aeronaveCRUD.findByPrefixo(prefixo);
     }
-
+ 
 }
